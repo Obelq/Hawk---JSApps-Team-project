@@ -1,0 +1,14 @@
+.team-box {
+    width: 15em;
+    border: 3px solid antiquewhite;
+    padding: 10px;
+    display: inline-block;
+    margin: 2px 5px;
+}
+
+.team-box > * {
+    margin: 1.5px;
+    padding: 2px;
+    text-align: left;
+}
+
