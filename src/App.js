@@ -3,6 +3,8 @@ import Header from './Components/Shared/Header';
 import { Link } from 'react-router';
 import Observer from './Models/ObserverModel';
 import UserModel from './Models/UserModel';
+import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 export default class App extends Component {
 	constructor (props) {
@@ -21,28 +23,81 @@ export default class App extends Component {
 	render() {
 		if (this.state.isLoggedIn) {
 			return (
-				<div className="container">
+				<div id="wrapper" className="active">
 					<Header isLoggedIn={this.state.isLoggedIn} username={this.state.username}>
-						<Link to="/" className="btn btn-default">Home</Link>
-						<Link to="/catalog" className="btn btn-default">Catalog</Link>
-						<Link to="/create" className="btn btn-default">Create</Link>
-						<Link to="/about" className="btn btn-default">About</Link>
-						<Link to="/logout" className="btn btn-default" onClick={() => UserModel.logout(this.onLogout)}>Logout</Link>
+							<li>
+								<Link to="/">
+									Home
+								</Link>
+							</li>
+							<li>
+								<Link to="/catalog">
+									Catalog
+								</Link>
+							</li>
+							<li>
+								<Link to="/create">
+									Create
+								</Link>
+							</li>
+							<li>
+								<Link to="/about">
+									About
+								</Link>
+							</li>
+							<li>
+								<Link to="/logout" onClick={() => UserModel.logout(this.onLogout)}>
+									Logout
+								</Link>
+							</li>
 					</Header>
-					{this.props.children}
+					<div className="page-content-wrapper">
+						<div className="page-content inset">
+							<div className="row">
+								<div className="col-md-12">
+									{this.props.children}	
+								</div>
+								<p className="well lead">An Experiment using the sidebar (<a href="http://animeshmanglik.name">animeshmanglik.name</a>)</p> 
+							</div>
+						</div>
+					</div>
 				</div>
 			);
 		}
 
 		return (
-			<div className="container">
+			<div id="wrapper" className="active">
 				<Header isLoggedIn={this.state.isLoggedIn} username={this.state.username}>
-					<Link to="/" className="btn btn-default">Home</Link>
-					<Link to="/about" className="btn btn-default">About</Link>
-					<Link to="/login" className="btn btn-default">Login</Link>
-					<Link to="/register" className="btn btn-default">Register</Link>
+					<li>
+						<Link to="/">
+							Home
+						</Link>
+					</li>
+					<li>
+						<Link to="/about">
+							About
+						</Link>
+					</li>
+					<li>
+						<Link to="/login">
+							Login
+						</Link>
+					</li>
+					<li>
+						<Link to="/register">
+							Register
+						</Link>
+					</li>
 				</Header>
-				{this.props.children}
+				<div className="page-content-wrapper container">
+					<div className="page-content inset">
+						<div className="row">
+							<div className="col-md-12 well lead">
+								{this.props.children}	
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}

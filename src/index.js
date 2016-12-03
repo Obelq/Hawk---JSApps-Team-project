@@ -11,6 +11,7 @@ import LoginPage from './Components/Login/LoginPage';
 import CreatePage from './Components/Teams/Create/CreatePage';
 import EditPage from './Components/Teams/Edit/EditPage';
 import DeletePage from './Components/Teams/Delete/DeletePage';
+import $ from 'jquery';
 
 ReactDOM.render(
     <Router history={browserHistory}>
