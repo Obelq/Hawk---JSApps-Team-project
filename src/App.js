@@ -25,45 +25,46 @@ export default class App extends Component {
 			return (
 				<div id="wrapper" className="active">
 					<Header isLoggedIn={this.state.isLoggedIn} username={this.state.username}>
-							<li>
-								<Link to="/">
-									Home
-								</Link>
-							</li>
-							<li>
-								<Link to="/catalog">
-									Catalog
-								</Link>
-							</li>
-							<li>
-								<Link to="/create">
-									Create
-								</Link>
-							</li>
-							<li>
-								<Link to="/about">
-									About
-								</Link>
-							</li>
-							<li>
-								<Link to="/logout" onClick={() => UserModel.logout(this.onLogout)}>
-									Logout
-								</Link>
-							</li>
+						<li>
+							<Link to="/">
+								Home
+							</Link>
+						</li>
+						<li>
+							<Link to="/catalog">
+								Catalog
+							</Link>
+						</li>
+						<li>
+							<Link to="/create">
+								Create
+							</Link>
+						</li>
+						<li>
+							<Link to="/about">
+								About
+							</Link>
+						</li>
+						<li>
+							<Link to="/logout" onClick={() => UserModel.logout(this.onLogout)}>
+								Logout
+							</Link>
+						</li>
 					</Header>
-					<div className="page-content-wrapper">
+					<div className="page-content-wrapper container">
 						<div className="page-content inset">
 							<div className="row">
-								<div className="col-md-12">
+								<div className="col-md-12 well lead">
 									{this.props.children}	
 								</div>
-								<p className="well lead">An Experiment using the sidebar (<a href="http://animeshmanglik.name">animeshmanglik.name</a>)</p> 
 							</div>
 						</div>
 					</div>
 				</div>
 			);
 		}
+
+		
 
 		return (
 			<div id="wrapper" className="active">
