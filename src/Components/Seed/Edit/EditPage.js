@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EditForm from '../Edit/EditForm';
-import TeamModel from '../../../Models/TeamModel';
+import SeedModel from '../../../Models/SeedModel';
 // import Observer from '../../models/Observer';
 
 export default class EditPage extends Component {
@@ -10,6 +10,9 @@ export default class EditPage extends Component {
         this.state = {
             name: '',
             description: '',
+            price: '',
+            location: '',
+            imageUrl: '',
             isDisabled: true
         };
 
@@ -26,6 +29,9 @@ export default class EditPage extends Component {
                 <EditForm
                     name={this.state.name}
                     description={this.state.description}
+                    price={this.state.price}
+                    location={this.state.location}
+                    imageUrl={this.state.imageUrl}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
                     isDisabled={this.state.isDisabled}
@@ -39,20 +45,31 @@ export default class EditPage extends Component {
         let newState = {};
         newState[event.target.name] = event.target.value;
 
-        if (event.target.name === 'name') {
-            newState.isDisabled = event.target.value.length < 3;
-        }
+        newState.isDisabled = this.state.name.length < 3 ||
+            this.state.description.length < 3 ||
+            this.state.location.length < 3 || !Number(this.state.price) ||
+            this.state.imageUrl.length < 3;
 
         this.setState(newState);
     }
 
     onSubmitHandler (event) {
         event.preventDefault();
-        if (this.state.name.length < 3) {
-            alert('Team name must be at least 3 characters long.');
-        } else {
-            TeamModel.edit(this.props.params.teamId, this.state.name, this.state.description, this.onEditSuccess);
-        }
+        this.setState({
+            isDisabled: true
+        });
+
+        SeedModel
+            .edit(
+                this.props.params.seedId,
+                this.state.name,
+                this.state.description,
+                this.state.price,
+                this.state.location,
+                this.state.imageUrl,
+                this.onEditSuccess
+            );
+
     }
 
     onEditSuccess (result) {
@@ -60,13 +77,16 @@ export default class EditPage extends Component {
     }
 
     componentDidMount () {
-        TeamModel.loadDetails(this.props.params.teamId, this.onLoadSuccess);
+        SeedModel.loadDetails(this.props.params.seedId, this.onLoadSuccess);
     }
 
     onLoadSuccess (response) {
         this.setState({
             name: response.name,
             description: response.description,
+            location: response.location,
+            price: response.price,
+            imageUrl: response.imageUrl,
             isDisabled: false
         });
     }

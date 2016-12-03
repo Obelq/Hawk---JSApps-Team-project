@@ -23,7 +23,7 @@ export default class App extends Component {
 	render() {
 		if (this.state.isLoggedIn) {
 			return (
-				<div id="wrapper" className="active">
+				<div id="wrapper"  className="active">
 					<Header isLoggedIn={this.state.isLoggedIn} username={this.state.username}>
 						<li>
 							<Link to="/">
@@ -63,8 +63,6 @@ export default class App extends Component {
 				</div>
 			);
 		}
-
-		
 
 		return (
 			<div id="wrapper" className="active">

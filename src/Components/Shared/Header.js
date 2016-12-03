@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Greeting from './Greeting';
 import './Header.css';
 import { Link } from 'react-router';
 

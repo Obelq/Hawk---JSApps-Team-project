@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CreateForm from './CreateForm';
-import TeamModel from '../../../Models/TeamModel';
+import SeedModel from '../../../Models/SeedModel';
 // import Observer from '../../models/Observer';
 
 export default class CreatePage extends Component {
@@ -9,7 +9,10 @@ export default class CreatePage extends Component {
 
         this.state = {
             name: '',
+            price: '',
             description: '',
+            location: '',
+            imageUrl: '',
             isDisabled: true
         };
 
@@ -24,7 +27,10 @@ export default class CreatePage extends Component {
                 <h1>Create</h1>
                 <CreateForm
                     name={this.state.name}
+                    price={this.state.price}
                     description={this.state.description}
+                    location={this.state.location}
+                    imageUrl={this.state.imageUrl}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
                     isDisabled={this.state.isDisabled}
@@ -38,19 +44,28 @@ export default class CreatePage extends Component {
         let newState = {};
         newState[event.target.name] = event.target.value;
 
-        if (event.target.name === 'name') {
-            newState.isDisabled = event.target.value.length < 3;
-        }
+        newState.isDisabled = this.state.name.length < 3 ||
+            this.state.description.length < 3 ||
+            this.state.location.length < 3 || !Number(this.state.price) ||
+            this.state.imageUrl.length < 3;
 
         this.setState(newState);
     }
 
     onSubmitHandler (event) {
         event.preventDefault();
-        TeamModel.create(this.state.name, this.state.description, this.onCreateSuccess);
+        SeedModel
+            .create(
+                this.state.name,
+                this.state.description,
+                this.state.price,
+                this.state.location,
+                this.state.imageUrl,
+                this.onCreateSuccess);
     }
 
     onCreateSuccess (result) {
+        // TODO: create details page
         this.context.router.push('/catalog');
     }
 }

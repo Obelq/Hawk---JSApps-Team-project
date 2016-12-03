@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DeleteForm from '../Delete/DeleteForm';
-import TeamModel from '../../../Models/TeamModel';
+import SeedModel from '../../../Models/SeedModel';
 // import Observer from '../../models/Observer';
 
 export default class EditPage extends Component {
@@ -9,7 +9,10 @@ export default class EditPage extends Component {
 
         this.state = {
             name: '',
-            description: ''
+            description: '',
+            price: '',
+            location: '',
+            imageUrl: ''
         };
 
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -24,6 +27,9 @@ export default class EditPage extends Component {
                 <DeleteForm
                     name={this.state.name}
                     description={this.state.description}
+                    price={this.state.price}
+                    location={this.state.location}
+                    imageUrl={this.state.imageUrl}
                     onSubmit={this.onSubmitHandler}
                 />
             </div>
@@ -32,7 +38,7 @@ export default class EditPage extends Component {
 
     onSubmitHandler (event) {
         event.preventDefault();
-        TeamModel.delete(this.props.params.teamId, this.onDeleteSuccess);
+        SeedModel.delete(this.props.params.seedId, this.onDeleteSuccess);
     }
 
     onDeleteSuccess (result) {
@@ -40,13 +46,16 @@ export default class EditPage extends Component {
     }
 
     componentDidMount () {
-        TeamModel.loadDetails(this.props.params.teamId, this.onLoadSuccess);
+        SeedModel.loadDetails(this.props.params.seedId, this.onLoadSuccess);
     }
 
     onLoadSuccess (response) {
         this.setState({
             name: response.name,
-            description: response.description
+            description: response.description,
+            price: response.price,
+            location: response.location,
+            imageUrl: response.imageUrl
         });
     }
 }

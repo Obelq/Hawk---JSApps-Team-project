@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
 const kinveyBaseUrl = 'https://baas.kinvey.com';
-const kinveyAppKey = 'kid_S1xqDgAGe';
-const kinveyAppSecret = 'c50e91b08e084933a6a58b109492d445';
+const kinveyAppKey = 'kid_SJqfW4lXg';
+const kinveyAppSecret = '44b591000b3240c3a759a3a10859fbd8';
 
 function getHeaders (auth) {
     let headers = {
@@ -79,3 +79,16 @@ export default class Requester {
         return $.ajax(request);
     }
 }
+
+let a = $('a');
+$(document).on({
+    ajaxStart: function () {
+        a.unbind("click");
+        a.unbind("keyup");
+    },
+    ajaxStop: function () {
+        a.bind("click");
+        a.bind("keyup");
+    }
+});
+
