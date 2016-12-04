@@ -1,15 +1,22 @@
 import Requester from './RequesterModel';
 
-export default class Seed {
-    static create (name, price, description, imageUrl, location, callback) {
+export default class SeedModel {
+    static create (name, price, description, imageUrl, location, category, discount, callback) {
         let seedData = {
             name: name,
-            price: price,
+            price: Number(price),
             description: description,
             imageUrl: imageUrl,
             location: location,
+<<<<<<< HEAD
             dateCrated: new Date(),
             isPromotional: false
+=======
+            dateCreated: new Date(),
+            likes: 0,
+            discount: Number(discount),
+            categoryId: category
+>>>>>>> origin/master
         };
 
         Requester
@@ -23,6 +30,7 @@ export default class Seed {
             .then(callback);
     }
 
+<<<<<<< HEAD
     static loadNewestSeeds (callback) {
         Requester.get('appdata', 'seeds', 'kinvey')
             .then(callback);
@@ -30,16 +38,22 @@ export default class Seed {
 
     static loadDetails (teamId, callback) {
         Requester.get('appdata', `seeds/${teamId}`, 'kinvey')
+=======
+    static loadDetails (seedId, callback) {
+        Requester.get('appdata', `seeds/${seedId}`, 'kinvey')
+>>>>>>> origin/master
             .then(callback);
     }
 
-    static edit (seedId, name, description, price, location, imageUrl, callback) {
+    static edit (seedId, name, description, price, location, imageUrl, discount, categoryId, callback) {
         let seedData = {
             name: name,
-            price: price,
+            price: Number(price),
             description: description,
             imageUrl: imageUrl,
-            location: location
+            location: location,
+            discount: Number(discount),
+            categoryId: categoryId
         };
 
         Requester
@@ -53,5 +67,10 @@ export default class Seed {
             .delete('appdata', `seeds/${seedId}`, 'kinvey')
             .then(() => callback(true))
             .catch(() => callback(false));
+    }
+
+    static loadSeedsByCategoryId(categoryId, callback) {
+        Requester.get('appdata', `seeds?query={"categoryId":"${categoryId}"}`, 'kinvey')
+            .then(callback);
     }
 }

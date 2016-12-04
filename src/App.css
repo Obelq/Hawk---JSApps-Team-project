@@ -1,0 +1,26 @@
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ddd;
+    font-size: 1.5em;
+    font-family: Georgia, serif;
+}
+
+
+.page-content-wrapper {
+    /*padding: 50px;*/
+    margin: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+.text-black {
+  font-weight: 900;
+}
+
+textarea {
+    resize: none;
+}
