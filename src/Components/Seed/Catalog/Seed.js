@@ -13,6 +13,5 @@ export default class Seed extends Component {
                 <td><img src={this.props.imageUrl} alt="Snimka"/></td>
             </tr>
         );
-
     }
 }

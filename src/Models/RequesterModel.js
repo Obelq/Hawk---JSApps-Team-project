@@ -23,7 +23,7 @@ function getHeaders (auth) {
         case 'guest':
             headers['Authorization'] = `Basic ${btoa('guest:guest')}`;
             break;
-        default: 
+        default:
             headers = undefined;
             break;
     }

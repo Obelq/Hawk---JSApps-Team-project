@@ -24,7 +24,10 @@ export default class CatalogPage extends Component {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
+
+
     onSubmitHandler (event) {
+
         event.preventDefault();
 
         let searchText = event.target.children[0].value;
