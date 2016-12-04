@@ -1,7 +1,7 @@
 import Requester from './RequesterModel';
 
 export default class SeedModel {
-    static create (name, price, description, imageUrl, location, category, discount, callback) {
+    static create (name, price, description, imageUrl, location, categoryId, discount, callback) {
         let seedData = {
             name: name,
             price: Number(price),
@@ -13,7 +13,7 @@ export default class SeedModel {
             dateCreated: new Date(),
             likes: 0,
             discount: Number(discount),
-            categoryId: category
+            categoryId: categoryId
         };
 
         Requester

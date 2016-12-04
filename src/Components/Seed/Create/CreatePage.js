@@ -38,9 +38,9 @@ export default class CreatePage extends Component {
                     imageUrl={this.state.imageUrl}
                     categoryId={this.state.categoryId}
                     categories={this.state.categories}
+                    discount={this.state.discount}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
-                    discount={this.state.discount}
                     isDisabled={this.state.isDisabled}
                 />
             </div>
@@ -68,7 +68,6 @@ export default class CreatePage extends Component {
                 this.state.price,
                 this.state.description,
                 this.state.imageUrl,
-                this.dateCreated,
                 this.state.location,
                 this.state.categoryId,
                 this.state.discount,
@@ -88,7 +87,7 @@ export default class CreatePage extends Component {
 
     onCreateSuccess (result) {
         // TODO: create details page
-        this.context.router.push('/catalog');
+        this.context.router.push('/');
     }
 }
 

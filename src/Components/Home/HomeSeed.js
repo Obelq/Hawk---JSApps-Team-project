@@ -39,7 +39,7 @@ export default class Seed extends Component {
                 <br />
                 <span>Description:</span>
                 <p>{this.props.description || "No description"}</p>
-                <img width="150" height="150" role="presentation"  href={this.props.imageUrl} />
+                <img src={this.props.imageUrl} alt="Snimka"/>
             </div>
         );
     
