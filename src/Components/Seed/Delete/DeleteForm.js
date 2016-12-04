@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-/**
- * Created by Zahariya on 4.12.2016 г..
- */
-=======
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
@@ -109,4 +104,3 @@ export default class DeleteForm extends Component {
         );
     }
 }
->>>>>>> origin/master

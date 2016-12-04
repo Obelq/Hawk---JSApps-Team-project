@@ -68,13 +68,10 @@ export default class CreatePage extends Component {
                 this.state.price,
                 this.state.description,
                 this.state.imageUrl,
-<<<<<<< HEAD
                 this.dateCreated,
-=======
                 this.state.location,
                 this.state.categoryId,
                 this.state.discount,
->>>>>>> origin/master
                 this.onCreateSuccess);
     }
 

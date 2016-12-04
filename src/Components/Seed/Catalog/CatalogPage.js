@@ -27,7 +27,7 @@ export default class CatalogPage extends Component {
 
         event.preventDefault();
         let searchText = event.target.children[0].value;
-        console.log(searchText)
+        console.log(searchText);
         this.setState({
             searchText: searchText
         })

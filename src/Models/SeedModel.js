@@ -8,15 +8,12 @@ export default class SeedModel {
             description: description,
             imageUrl: imageUrl,
             location: location,
-<<<<<<< HEAD
             dateCrated: new Date(),
-            isPromotional: false
-=======
+            isPromotional: false,
             dateCreated: new Date(),
             likes: 0,
             discount: Number(discount),
             categoryId: category
->>>>>>> origin/master
         };
 
         Requester
@@ -30,18 +27,13 @@ export default class SeedModel {
             .then(callback);
     }
 
-<<<<<<< HEAD
     static loadNewestSeeds (callback) {
-        Requester.get('appdata', 'seeds', 'kinvey')
+        Requester.get('appdata', 'seeds', 'guest')
             .then(callback);
     }
 
-    static loadDetails (teamId, callback) {
-        Requester.get('appdata', `seeds/${teamId}`, 'kinvey')
-=======
     static loadDetails (seedId, callback) {
         Requester.get('appdata', `seeds/${seedId}`, 'kinvey')
->>>>>>> origin/master
             .then(callback);
     }
 
