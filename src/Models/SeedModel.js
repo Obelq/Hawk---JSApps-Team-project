@@ -28,9 +28,10 @@ export default class SeedModel {
     }
 
     static loadNewestSeeds (callback) {
-        Requester.get('appdata', 'seeds', 'guest')
+        Requester.get('appdata', 'seeds', 'kinvey')
             .then(callback);
     }
+
 
     static loadDetails (seedId, callback) {
         Requester.get('appdata', `seeds/${seedId}`, 'kinvey')
