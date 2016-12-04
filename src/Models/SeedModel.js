@@ -27,11 +27,20 @@ export default class SeedModel {
             .then(callback);
     }
 
+    static loadMostLikedSeeds (callback) {
+        Requester.get('appdata', 'seeds', 'guest')
+            .then(callback);
+    }
+    
     static loadNewestSeeds (callback) {
-        Requester.get('appdata', 'seeds', 'kinvey')
+        Requester.get('appdata', 'seeds', 'guest')
             .then(callback);
     }
 
+    static loadPromoSeeds (callback) {
+        Requester.get('appdata', 'seeds', 'guest')
+            .then(callback);
+    }
 
     static loadDetails (seedId, callback) {
         Requester.get('appdata', `seeds/${seedId}`, 'kinvey')
@@ -67,3 +76,4 @@ export default class SeedModel {
             .then(callback);
     }
 }
+
