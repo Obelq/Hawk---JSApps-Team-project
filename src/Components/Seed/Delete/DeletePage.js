@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DeleteForm from '../Delete/DeleteForm';
 import SeedModel from '../../../Models/SeedModel';
+import CategoryModel from '../../../Models/CategoryModel';
 // import Observer from '../../models/Observer';
 
 export default class EditPage extends Component {
@@ -12,12 +13,15 @@ export default class EditPage extends Component {
             description: '',
             price: '',
             location: '',
-            imageUrl: ''
+            imageUrl: '',
+            discount: 0,
+            category: ''
         };
 
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onDeleteSuccess = this.onDeleteSuccess.bind(this);
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+        this.onCategoryLoadSuccess = this.onCategoryLoadSuccess.bind(this);
     }
 
     render () {
@@ -30,6 +34,8 @@ export default class EditPage extends Component {
                     price={this.state.price}
                     location={this.state.location}
                     imageUrl={this.state.imageUrl}
+                    discount={this.state.discount}
+                    category={this.state.category}
                     onSubmit={this.onSubmitHandler}
                 />
             </div>
@@ -55,7 +61,16 @@ export default class EditPage extends Component {
             description: response.description,
             price: response.price,
             location: response.location,
-            imageUrl: response.imageUrl
+            imageUrl: response.imageUrl,
+            discount: response.discount
+        });
+
+        CategoryModel.getCategoryById(response.categoryId, this.onCategoryLoadSuccess);
+    }
+
+    onCategoryLoadSuccess (response) {
+        this.setState({
+            category: response.name
         });
     }
 }

@@ -17,6 +17,9 @@ function getHeaders (auth) {
         case 'kinvey':
             headers['Authorization'] = `Kinvey ${sessionStorage.getItem('authToken')}`;
             break;
+            case 'admin':
+                headers['Authorization'] = `Basic ${btoa('admin:admin')}`;
+                break;
         default:
             headers = undefined;
             break;
