@@ -61,6 +61,7 @@ export default class CreatePage extends Component {
                 this.state.price,
                 this.state.location,
                 this.state.imageUrl,
+                this.dateCreated,
                 this.onCreateSuccess);
     }
 

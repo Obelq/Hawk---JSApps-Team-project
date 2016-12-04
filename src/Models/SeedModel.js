@@ -7,7 +7,9 @@ export default class Seed {
             price: price,
             description: description,
             imageUrl: imageUrl,
-            location: location
+            location: location,
+            dateCrated: new Date(),
+            isPromotional: false
         };
 
         Requester
@@ -17,6 +19,11 @@ export default class Seed {
     }
 
     static loadSeeds (callback) {
+        Requester.get('appdata', 'seeds', 'kinvey')
+            .then(callback);
+    }
+
+    static loadNewestSeeds (callback) {
         Requester.get('appdata', 'seeds', 'kinvey')
             .then(callback);
     }
