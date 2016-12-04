@@ -15,7 +15,7 @@ export default class Seed extends Component {
                     <br />
                     <span>Description:</span>
                     <p>{this.props.description || "No description"}</p>
-                    <img role="presentation" href={this.props.imageUrl} />
+                    <img className="listed-seed-image" role="presentation" src={this.props.imageUrl} />
                     <br />
                     <span>Management</span>
                     <br />
@@ -39,7 +39,7 @@ export default class Seed extends Component {
                 <br />
                 <span>Description:</span>
                 <p>{this.props.description || "No description"}</p>
-                <img width="150" height="150" role="presentation"  href={this.props.imageUrl} />
+                <img role="presentation" src={this.props.imageUrl}></img>
             </div>
         );
     

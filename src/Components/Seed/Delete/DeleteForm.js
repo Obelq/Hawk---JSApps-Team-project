@@ -11,10 +11,10 @@ export default class DeleteForm extends Component {
                         className="form-control"
                         type="text"
                         name="name"
-                        placeholder="Name"
                         value={this.props.name}
                         onChange={this.props.onChange}
-                        disabled={true}
+                        required
+                        disabled="true"
                     />
                 </div>
 
@@ -26,7 +26,22 @@ export default class DeleteForm extends Component {
                         name="description"
                         value={this.props.description}
                         onChange={this.props.onChange}
-                        disabled={true}
+                        required
+                        rows="6" cols="50"
+                        disabled="true"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Location</label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="location"
+                        value={this.props.location}
+                        onChange={this.props.onChange}
+                        required
+                        disabled="true"
                     />
                 </div>
 
@@ -38,19 +53,9 @@ export default class DeleteForm extends Component {
                         name="price"
                         value={this.props.price}
                         onChange={this.props.onChange}
-                        disabled={true}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label>Location</label>
-                    <input
-                        className="form-control"
-                        type="text"
-                        name="price"
-                        value={this.props.location}
-                        onChange={this.props.onChange}
-                        disabled={true}
+                        required
+                        step="0.01"
+                        disabled="true"
                     />
                 </div>
 
@@ -62,7 +67,27 @@ export default class DeleteForm extends Component {
                         name="imageUrl"
                         value={this.props.imageUrl}
                         onChange={this.props.onChange}
-                        disabled={true}
+                        required
+                        disabled="true"
+                    />
+                </div>
+                
+                <div className="form-group">
+                    <label>Category</label>
+                    <input type="text" value={this.props.category} className="form-control" name="category" disabled/>
+                </div>
+
+                <div className="form-group">
+                    <label>Discount</label>
+                    <input
+                        className="form-control"
+                        type="number"
+                        name="discount"
+                        value={this.props.discount}
+                        onChange={this.props.onChange}
+                        required
+                        step="0.01"
+                        disabled="true"
                     />
                 </div>
 

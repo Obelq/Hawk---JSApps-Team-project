@@ -7,7 +7,8 @@ export default class CatalogPage extends Component {
         super(props);
 
         this.state = {
-            seeds: []
+            seeds: [],
+            categoryId: ''
         };
 
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
@@ -41,6 +42,10 @@ export default class CatalogPage extends Component {
     }
 
     componentWillMount () {
-        SeedModel.loadSeeds(this.onLoadSuccess);
+        if (this.state.categoryId) {
+            SeedModel.loadSeedsByCategoryId('5843d0cde6d6cc63109c4f5d', this.onLoadSuccess);
+        } else {
+            SeedModel.loadSeeds(this.onLoadSuccess);
+        }
     }
 }
