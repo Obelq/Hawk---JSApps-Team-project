@@ -65,4 +65,9 @@ export default class SeedModel {
         Requester.get('appdata', `seeds?query={"categoryId":"${categoryId}"}`, 'kinvey')
             .then(callback);
     }
+
+    static getSeedById(seedId, callback) {
+        Requester.get('appdata', `seeds/` + seedId, 'kinvey')
+            .then(callback);
+    }
 }
