@@ -1,6 +1,6 @@
 import Requester from './RequesterModel';
 
-export default class Seed {
+export default class SeedModel {
     static create (name, price, description, imageUrl, location, category, discount, callback) {
         let seedData = {
             name: name,
