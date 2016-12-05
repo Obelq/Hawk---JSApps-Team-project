@@ -8,7 +8,7 @@ export default class Header extends Component {
             <div id="sidebar-wrapper">
                 <ul id="sidebar_menu" className="sidebar-nav">
                     <li className="sidebar-brand">
-                        <Link id="menu-toggle" to="/">Kartofi</Link>
+                        <Link id="menu-toggle" to="/">Hawk's seeds</Link>
                     </li>
                 </ul>
                 <ul className="sidebar-nav" id="sidebar">
