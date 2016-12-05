@@ -6,6 +6,13 @@ let Form = React.createClass({
     render: function () {
         return <form onSubmit={this.props.onsubmit}>
             <input type="text" placeholder="Search..."/>
+            <span> Search by: </span>
+            <select>
+                <option value="name">Name&Description</option>
+                <option value="location">Location</option>
+                <option value="producer">Producer</option>
+                <option value="model">Model</option>
+            </select>
             <input type="submit" defaultValue="Submit" />
         </form>
     }
@@ -19,6 +26,7 @@ export default class CatalogPage extends Component {
             seeds: [],
             categoryId: '',
             searchText: '',
+            searchBy: 'name',
             shoppingCartItems: []
         };
 
@@ -33,6 +41,7 @@ export default class CatalogPage extends Component {
         event.preventDefault();
 
         let searchText = event.target.children[0].value;
+        let searchBy = event.target.children[2].value;
         this.setState({
             searchText: searchText
         })
