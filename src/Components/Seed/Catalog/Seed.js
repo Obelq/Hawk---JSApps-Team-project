@@ -18,7 +18,7 @@ export default class Seed extends Component {
                         value="Add to chart"
                         data-seed-name={this.props.name}
                         data-seed-price={this.props.price}
-                        onClick={this.props.addToChart}
+                        onClick={this.props.addToCart}
                     />
                 </td>
             </tr>

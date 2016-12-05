@@ -118,17 +118,17 @@ h1 span {
     color: white;
 }
 
-.shopping-chart{
+.shopping-cart{
     text-align: right;
 }
 
-.shopping-chart h3{
+.shopping-cart h3{
     color: white;
     background-color: #167F92;
     padding: 10px;
 }
 
-.shopping-chart-item {
+.shopping-cart-item {
     text-align: right;
 }
 
@@ -145,7 +145,7 @@ h1 span {
     position: relative;
 }
 
-.shopping-chart-container {
+.shopping-cart-container {
     position: absolute;
     top: 20px;
     right: -300px;
