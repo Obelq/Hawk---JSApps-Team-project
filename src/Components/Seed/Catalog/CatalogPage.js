@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SeedModel from '../../../Models/SeedModel';
 import Seed from './Seed';
-import ShoppingChart from './ShoppingChart';
+import ShoppingCart from './ShoppingCart';
 let Form = React.createClass({
     render: function () {
         return <form onSubmit={this.props.onsubmit}>
@@ -19,13 +19,13 @@ export default class CatalogPage extends Component {
             seeds: [],
             categoryId: '',
             searchText: '',
-            shoppingChartItems: []
+            shoppingCartItems: []
         };
 
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
         this.handleOnClickEvent = this.handleOnClickEvent.bind(this);
-        this.handleAddToChartEvent = this.handleAddToChartEvent.bind(this);
-        this.removeChartItem = this.removeChartItem.bind(this);
+        this.handleAddToCartEvent = this.handleAddToCartEvent.bind(this);
+        this.removeCartItem = this.removeCartItem.bind(this);
     }
 
 
@@ -50,7 +50,7 @@ export default class CatalogPage extends Component {
                         seedId={seed._id}
                         seedCreator={seed._acl.creator}
                         onClick={_self.handleOnClickEvent}
-                        addToChart={_self.handleAddToChartEvent}
+                        addToCart={_self.handleAddToCartEvent}
                     />
         });
 
@@ -72,9 +72,9 @@ export default class CatalogPage extends Component {
                             {newestSeeds}
                         </tbody>
                     </table>
-                    <ShoppingChart 
-                        items={this.state.shoppingChartItems}
-                        removeItem={_self.removeChartItem}
+                    <ShoppingCart 
+                        items={this.state.shoppingCartItems}
+                        removeItem={_self.removeCartItem}
                     />
                 </div>
             </div>
@@ -100,27 +100,27 @@ export default class CatalogPage extends Component {
         }
     }
 
-    handleAddToChartEvent (event) {
+    handleAddToCartEvent (event) {
         let newItem = {
             name: event.currentTarget.getAttribute('data-seed-name'),
             price: event.currentTarget.getAttribute('data-seed-price')
         }
         
-        let shoppingChartItems = this.state.shoppingChartItems;
-        shoppingChartItems.push(newItem);
+        let shoppingCartItems = this.state.shoppingCartItems;
+        shoppingCartItems.push(newItem);
 
         this.setState({
-            shoppingChartItems: shoppingChartItems
+            shoppingCartItems: shoppingCartItems
         });
     }
 
-    removeChartItem (event) {
+    removeCartItem (event) {
         let itemToDeleteIndex = event.currentTarget.getAttribute('data-item-index');
-        let shoppingChartItems = this.state.shoppingChartItems;
-        shoppingChartItems.splice(itemToDeleteIndex, 1);
+        let shoppingCartItems = this.state.shoppingCartItems;
+        shoppingCartItems.splice(itemToDeleteIndex, 1);
 
         this.setState({
-            shoppingChartItems: shoppingChartItems
+            shoppingCartItems: shoppingCartItems
         });
     }
 }
