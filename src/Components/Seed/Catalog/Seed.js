@@ -15,7 +15,7 @@ export default class Seed extends Component {
                         className="btn btn-primary"
                         type="button"
                         name="addToChart"
-                        value="Add to chart"
+                        value="Add to cart"
                         data-seed-name={this.props.name}
                         data-seed-price={this.props.price}
                         onClick={this.props.addToCart}
