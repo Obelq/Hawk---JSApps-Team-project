@@ -51,7 +51,7 @@ export default class CatalogPage extends Component {
                              seedId={seed._id}
                              seedCreator={seed._acl.creator}
                              onClick={_self.handleOnClickEvent}
-                             addToChart={_self.handleAddToChartEvent}
+                             addToCart={_self.handleAddToCartEvent}
 
                 />
             }
@@ -88,7 +88,7 @@ export default class CatalogPage extends Component {
                         </tbody>
                     </table>
 
-                    <ShoppingCart 
+                    <ShoppingCart
                         items={this.state.shoppingCartItems}
                         removeItem={_self.removeCartItem}
                     />
@@ -125,7 +125,7 @@ export default class CatalogPage extends Component {
         
         let shoppingCartItems = this.state.shoppingCartItems;
         shoppingCartItems.push(newItem);
-
+        console.log(shoppingCartItems);
         this.setState({
             shoppingCartItems: shoppingCartItems
         });
