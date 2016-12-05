@@ -42,6 +42,20 @@ export default class CatalogPage extends Component {
     render () {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
+            if(seed.name.indexOf(_self.state.searchText)!=-1||seed.description.indexOf(_self.state.searchText)!=-1) {
+                return <Seed key={index}
+                             name={seed.name}
+                             price={seed.price}
+                             location={seed.location}
+                             imageUrl={seed.imageUrl}
+                             seedId={seed._id}
+                             seedCreator={seed._acl.creator}
+                             onClick={_self.handleOnClickEvent}
+                             addToChart={_self.handleAddToChartEvent}
+
+                />
+            }
+            
             return <Seed key={index}
                         name={seed.name}
                         price={seed.price}
@@ -55,9 +69,10 @@ export default class CatalogPage extends Component {
         });
 
         return (
+
             <div className="row">
                 <div className="catalog-container col-sm-8">
-                    <Form onsubmit={this.onSubmitHandler}/>
+                    <Form onsubmit={this.onSubmitHandler.bind(this)}/>
                     <table className="table">
                         <thead>
                             <tr>
@@ -72,6 +87,7 @@ export default class CatalogPage extends Component {
                             {newestSeeds}
                         </tbody>
                     </table>
+
                     <ShoppingCart 
                         items={this.state.shoppingCartItems}
                         removeItem={_self.removeCartItem}
@@ -105,6 +121,7 @@ export default class CatalogPage extends Component {
             name: event.currentTarget.getAttribute('data-seed-name'),
             price: event.currentTarget.getAttribute('data-seed-price')
         }
+
         
         let shoppingCartItems = this.state.shoppingCartItems;
         shoppingCartItems.push(newItem);

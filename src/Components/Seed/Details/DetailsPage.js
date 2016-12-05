@@ -43,7 +43,7 @@ export default class DetailsPage extends Component {
                                     className="btn btn-primary"
                                     onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
                                 />
-                            :undefined}
+                                :undefined}
 
                         {
                             sessionStorage.getItem('username') === 'admin'?
@@ -52,8 +52,8 @@ export default class DetailsPage extends Component {
                                     value="Delete"
                                     className="btn btn-danger"
                                     onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
-                                 />
-                            :undefined
+                                />
+                                :undefined
                         }
                     </div>
                 </div>
