@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EditForm from '../Edit/EditForm';
 import SeedModel from '../../../Models/SeedModel';
+import CategoryModel from '../../../Models/CategoryModel';
 // import Observer from '../../models/Observer';
 
 export default class EditPage extends Component {
@@ -10,9 +11,13 @@ export default class EditPage extends Component {
         this.state = {
             name: '',
             description: '',
-            price: '',
+            price: 0,
             location: '',
             imageUrl: '',
+            discount: 0,
+            category: '',
+            model: '',
+            producer: '',
             isDisabled: true
         };
 
@@ -20,6 +25,7 @@ export default class EditPage extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onEditSuccess = this.onEditSuccess.bind(this);
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+        this.onCategoryLoadSuccess = this.onCategoryLoadSuccess.bind(this);
     }
 
     render () {
@@ -28,12 +34,16 @@ export default class EditPage extends Component {
                 <h1>Edit</h1>
                 <EditForm
                     name={this.state.name}
-                    description={this.state.description}
                     price={this.state.price}
+                    description={this.state.description}
                     location={this.state.location}
                     imageUrl={this.state.imageUrl}
+                    category={this.state.category}
+                    model={this.state.model}
+                    producer={this.state.producer}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
+                    discount={this.state.discount}
                     isDisabled={this.state.isDisabled}
                 />
             </div>
@@ -67,6 +77,10 @@ export default class EditPage extends Component {
                 this.state.price,
                 this.state.location,
                 this.state.imageUrl,
+                this.state.discount,
+                this.state.categoryId,
+                this.state.model,
+                this.state.producer,
                 this.onEditSuccess
             );
 
@@ -76,8 +90,15 @@ export default class EditPage extends Component {
         this.context.router.push('/catalog');
     }
 
-    componentDidMount () {
+    componentWillMount () {
         SeedModel.loadDetails(this.props.params.seedId, this.onLoadSuccess);
+    }
+
+    onCategoryLoadSuccess (response) {
+        this.setState({
+            categoryId: response._id,
+            category: response.name
+        });
     }
 
     onLoadSuccess (response) {
@@ -87,8 +108,13 @@ export default class EditPage extends Component {
             location: response.location,
             price: response.price,
             imageUrl: response.imageUrl,
+            discount: response.discount,
+            model: response.model,
+            producer: response.producer,
             isDisabled: false
         });
+
+        CategoryModel.getCategoryById(response.categoryId, this.onCategoryLoadSuccess);
     }
 }
 

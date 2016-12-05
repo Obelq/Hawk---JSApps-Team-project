@@ -16,46 +16,52 @@ export default class CatalogPage extends Component {
 
         this.state = {
             seeds: [],
-            searchText: ""
+            categoryId: '',
+            searchText: ''
+
         };
 
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+        this.handleOnClickEvent = this.handleOnClickEvent.bind(this);
     }
+
+
     onSubmitHandler (event) {
+
         event.preventDefault();
+
         let searchText = event.target.children[0].value;
-        alert()
         this.setState({
             searchText: searchText
         })
     }
 
     render () {
+        let _self = this;
+        let newestSeeds = this.state.seeds.map(function (seed, index) {
+            return <Seed key={index}
+                        name={seed.name}
+                        price={seed.price}
+                        location={seed.location}
+                        imageUrl={seed.imageUrl}
+                        seedId={seed._id}
+                        seedCreator={seed._acl.creator}
+                        onClick={_self.handleOnClickEvent}
+                    />
+        });
+
         return (
             <div>
                 <Form onsubmit={this.onSubmitHandler}/>
                 <h1>Catalog Page</h1>
-                <table><tbody>
+                <table className="table"><tbody>
                 <tr>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Location</th>
-                    <th>Description</th>
                     <th>Image</th>
                 </tr>
-                {
-                    this.state.seeds.map(function (seed, index) {
-                        return <Seed key={index}
-                                    name={seed.name}
-                                    price={seed.price}
-                                    location={seed.location}
-                                    imageUrl={seed.imageUrl}
-                                    description={seed.description}
-                                    seedId={seed._id}
-                                    seedCreator={seed._acl.creator}
-                                />
-                    })
-                }
+                {newestSeeds}
                 </tbody></table>
             </div>
         );
@@ -67,7 +73,20 @@ export default class CatalogPage extends Component {
         });
     }
 
-    componentWillMount () {
-        SeedModel.loadSeeds(this.onLoadSuccess);
+    handleOnClickEvent (event) {
+        let seedId = event.currentTarget.getAttribute('data-seed-id');
+        this.context.router.push('/details/' + seedId);
+    }
+
+    componentDidMount () {
+        if (this.state.categoryId) {
+            SeedModel.loadSeedsByCategoryId(this.state.categoryId, this.onLoadSuccess);
+        } else {
+            SeedModel.loadSeeds(this.onLoadSuccess);
+        }
     }
 }
+
+ CatalogPage.contextTypes = {
+     router: React.PropTypes.object
+ };

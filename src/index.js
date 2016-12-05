@@ -11,6 +11,7 @@ import LoginPage from './Components/Login/LoginPage';
 import CreatePage from './Components/Seed/Create/CreatePage';
 import EditPage from './Components/Seed/Edit/EditPage';
 import DeletePage from './Components/Seed/Delete/DeletePage';
+import DetailsPage from './Components/Seed/Details/DetailsPage';
 
 ReactDOM.render(
     <Router history={browserHistory}>
@@ -20,6 +21,7 @@ ReactDOM.render(
             <Route path="create" component={CreatePage} />
             <Route path="edit/:seedId" component={EditPage} />
             <Route path="delete/:seedId" component={DeletePage} />
+            <Route path="details/:seedId" component={DetailsPage} />
             <Route path="about" component={AboutPage} />
             <Route path="register" component={RegisterPage} />
             <Route path="login" component={LoginPage} />

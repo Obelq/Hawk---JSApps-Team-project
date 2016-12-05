@@ -17,3 +17,5 @@ npm-debug.log
 .idea
 .vscode
 *.vscode
+src/Components/Home/HomePage.js
+src/Components/Home/HomePage.js

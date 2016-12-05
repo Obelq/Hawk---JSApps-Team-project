@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CreateForm from './CreateForm';
 import SeedModel from '../../../Models/SeedModel';
-// import Observer from '../../models/Observer';
+import CategoryModel from '../../../Models/CategoryModel';
 
 export default class CreatePage extends Component {
     constructor (props) {
@@ -9,16 +9,22 @@ export default class CreatePage extends Component {
 
         this.state = {
             name: '',
-            price: '',
+            price: 0,
             description: '',
             location: '',
             imageUrl: '',
+            categories: [],
+            categoryId: '',
+            discount: 0,
+            producer: '',
+            model: '',
             isDisabled: true
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onCreateSuccess = this.onCreateSuccess.bind(this);
+        this.onCategoriesLoadSuccess = this.onCategoriesLoadSuccess.bind(this);
     }
 
     render () {
@@ -31,6 +37,11 @@ export default class CreatePage extends Component {
                     description={this.state.description}
                     location={this.state.location}
                     imageUrl={this.state.imageUrl}
+                    categoryId={this.state.categoryId}
+                    categories={this.state.categories}
+                    discount={this.state.discount}
+                    producer={this.state.producer}
+                    model={this.state.model}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
                     isDisabled={this.state.isDisabled}
@@ -57,16 +68,30 @@ export default class CreatePage extends Component {
         SeedModel
             .create(
                 this.state.name,
-                this.state.description,
                 this.state.price,
-                this.state.location,
+                this.state.description,
                 this.state.imageUrl,
+                this.state.location,
+                this.state.categoryId,
+                this.state.discount,
+                this.state.producer,
+                this.state.model,
                 this.onCreateSuccess);
     }
 
-    onCreateSuccess (result) {
-        // TODO: create details page
-        this.context.router.push('/catalog');
+    componentDidMount () {
+        CategoryModel.loadAll(this.onCategoriesLoadSuccess);
+    }
+
+    onCategoriesLoadSuccess (response) {
+        this.setState({
+            categories: response,
+            categoryId: response[0]._id
+        });
+    }
+
+    onCreateSuccess (response) {
+        this.context.router.push('/details/' + response._id);
     }
 }
 

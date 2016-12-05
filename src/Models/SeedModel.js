@@ -1,18 +1,24 @@
 import Requester from './RequesterModel';
 
 export default class SeedModel {
-    static create (name, price, description, imageUrl, location, callback) {
+    static create (name, price, description, imageUrl, location, categoryId, discount, producer, model, callback) {
         let seedData = {
             name: name,
-            price: price,
+            price: Number(price),
             description: description,
             imageUrl: imageUrl,
-            location: location
+            location: location,
+            dateCreated: new Date(),
+            likes: 0,
+            discount: Number(discount),
+            categoryId: categoryId,
+            producer: producer,
+            model: model
         };
 
         Requester
             .post('appdata', 'seeds', 'kinvey', seedData)
-            .then(() => callback(true))
+            .then((response) => callback(response))
             .catch(() => callback(false));
     }
 
@@ -21,18 +27,38 @@ export default class SeedModel {
             .then(callback);
     }
 
-    static loadDetails (teamId, callback) {
-        Requester.get('appdata', `seeds/${teamId}`, 'kinvey')
+    static loadMostLikedSeeds (callback) {
+        Requester.get('appdata', 'seeds', 'guest')
+            .then(callback);
+    }
+    
+    static loadNewestSeeds (callback) {
+        Requester.get('appdata', 'seeds', 'guest')
             .then(callback);
     }
 
-    static edit (seedId, name, description, price, location, imageUrl, callback) {
+    static loadPromoSeeds (callback) {
+        Requester.get('appdata', 'seeds', 'guest')
+            .then(callback);
+    }
+
+    static loadDetails (seedId, callback) {
+        Requester.get('appdata', `seeds/${seedId}`, 'kinvey')
+            .then(callback);
+    }
+
+    static edit (seedId, name, description, price, location, imageUrl, discount, categoryId, model, producer, callback) {
         let seedData = {
             name: name,
-            price: price,
+            price: Number(price),
             description: description,
             imageUrl: imageUrl,
-            location: location
+            location: location,
+            discount: Number(discount),
+            model: model,
+            producer: producer,
+            categoryId: categoryId,
+            dateCreated: new Date()
         };
 
         Requester
@@ -47,4 +73,15 @@ export default class SeedModel {
             .then(() => callback(true))
             .catch(() => callback(false));
     }
+
+    static loadSeedsByCategoryId(categoryId, callback) {
+        Requester.get('appdata', `seeds?query={"categoryId":"${categoryId}"}`, 'kinvey')
+            .then(callback);
+    }
+
+    static getSeedById(seedId, callback) {
+        Requester.get('appdata', `seeds/` + seedId, 'kinvey')
+            .then(callback);
+    }
 }
+
