@@ -82,7 +82,7 @@ table td:first-child {
 }
 table th,
 table td {
-    text-align: left;
+    text-align: center;
     margin: .5em 1em;
 }
 @media (min-width: 480px) {
@@ -112,3 +112,9 @@ h1 span {
    width: 50px;
     height: 50px;
 }
+
+.seed-row:hover {
+    background-color: #167F92;
+    color: white;
+}
+

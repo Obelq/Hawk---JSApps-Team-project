@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CreateForm from './CreateForm';
 import SeedModel from '../../../Models/SeedModel';
 import CategoryModel from '../../../Models/CategoryModel';
-// import Observer from '../../models/Observer';
 
 export default class CreatePage extends Component {
     constructor (props) {
@@ -17,6 +16,8 @@ export default class CreatePage extends Component {
             categories: [],
             categoryId: '',
             discount: 0,
+            producer: '',
+            model: '',
             isDisabled: true
         };
 
@@ -39,6 +40,8 @@ export default class CreatePage extends Component {
                     categoryId={this.state.categoryId}
                     categories={this.state.categories}
                     discount={this.state.discount}
+                    producer={this.state.producer}
+                    model={this.state.model}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
                     isDisabled={this.state.isDisabled}
@@ -71,6 +74,8 @@ export default class CreatePage extends Component {
                 this.state.location,
                 this.state.categoryId,
                 this.state.discount,
+                this.state.producer,
+                this.state.model,
                 this.onCreateSuccess);
     }
 
@@ -85,9 +90,8 @@ export default class CreatePage extends Component {
         });
     }
 
-    onCreateSuccess (result) {
-        // TODO: create details page
-        this.context.router.push('/');
+    onCreateSuccess (response) {
+        this.context.router.push('/details/' + response._id);
     }
 }
 

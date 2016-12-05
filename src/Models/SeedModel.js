@@ -1,24 +1,24 @@
 import Requester from './RequesterModel';
 
 export default class SeedModel {
-    static create (name, price, description, imageUrl, location, categoryId, discount, callback) {
+    static create (name, price, description, imageUrl, location, categoryId, discount, producer, model, callback) {
         let seedData = {
             name: name,
             price: Number(price),
             description: description,
             imageUrl: imageUrl,
             location: location,
-            dateCrated: new Date(),
-            isPromotional: false,
             dateCreated: new Date(),
             likes: 0,
             discount: Number(discount),
-            categoryId: categoryId
+            categoryId: categoryId,
+            producer: producer,
+            model: model
         };
 
         Requester
             .post('appdata', 'seeds', 'kinvey', seedData)
-            .then(() => callback(true))
+            .then((response) => callback(response))
             .catch(() => callback(false));
     }
 

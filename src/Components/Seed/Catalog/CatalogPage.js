@@ -22,7 +22,7 @@ export default class CatalogPage extends Component {
         };
 
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleOnClickEvent = this.handleOnClickEvent.bind(this);
     }
 
 
@@ -44,10 +44,9 @@ export default class CatalogPage extends Component {
                         price={seed.price}
                         location={seed.location}
                         imageUrl={seed.imageUrl}
-                        description={seed.description}
                         seedId={seed._id}
                         seedCreator={seed._acl.creator}
-                        onClick={_self.handleClick}
+                        onClick={_self.handleOnClickEvent}
                     />
         });
 
@@ -55,12 +54,11 @@ export default class CatalogPage extends Component {
             <div>
                 <Form onSubmit={this.onSubmitHandler}/>
                 <h1>Catalog Page</h1>
-                <table><tbody>
+                <table className="table"><tbody>
                 <tr>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Location</th>
-                    <th>Description</th>
                     <th>Image</th>
                 </tr>
                 {newestSeeds}
@@ -75,7 +73,7 @@ export default class CatalogPage extends Component {
         });
     }
 
-    handleClick (event) {
+    handleOnClickEvent (event) {
         let seedId = event.currentTarget.getAttribute('data-seed-id');
         this.context.router.push('/details/' + seedId);
     }

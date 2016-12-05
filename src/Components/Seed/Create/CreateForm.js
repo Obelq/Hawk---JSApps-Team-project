@@ -90,6 +90,30 @@ export default class CreateForm extends Component {
                     />
                 </div>
 
+                <div className="form-group">
+                    <label>Producer / Company</label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="producer"
+                        value={this.props.producer}
+                        onChange={this.props.onChange}
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Model</label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="model"
+                        value={this.props.model}
+                        onChange={this.props.onChange}
+                        required
+                    />
+                </div>
+
                 <input
                     className="btn btn-default"
                     type="submit" value="Create"
