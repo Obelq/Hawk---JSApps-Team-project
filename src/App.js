@@ -32,7 +32,7 @@ export default class App extends Component {
 						</li>
 						<li>
 							<Link to="/catalog">
-								Catalog
+								Catalogue
 							</Link>
 						</li>
 						<li>

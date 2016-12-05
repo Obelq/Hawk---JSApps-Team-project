@@ -19,7 +19,7 @@ export default class SeedModel {
     }
 
     static loadDetails (seedId, callback) {
-        Requester.get('appdata', `seeds/${seedId}`, 'kinvey')
+        Requester.get('appdata', `favorites/${seedId}`, 'kinvey')
             .then(callback);
     }
 
