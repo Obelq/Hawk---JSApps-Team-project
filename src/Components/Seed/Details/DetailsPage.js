@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SeedModel from '../../../Models/SeedModel.js';
-
+import CommentModel from '../../../Models/CommentModel.js';
+import CommentView from './CommentView';
 
 export default class DetailsPage extends Component {
     constructor(props) {
@@ -10,13 +11,22 @@ export default class DetailsPage extends Component {
              description: '',
              location: '',
              price: '',
-             imageUrl: ''
+             imageUrl: '',
+             comments: []
          };
 
          this.onLoadSuccess = this.onLoadSuccess.bind(this);
+         this.onLoadComments = this.onLoadComments.bind(this);
      }
 
     render() {
+        let comments = this.state.comments.map(function (comment, index) {
+            return <CommentView key={index}
+                                authorName={comment.authorName}
+                                content={comment.content}
+                                date={comment.date}
+                   />
+        });
           return (
               <div className="col-md-9">
                 <div className="thumbnail">
@@ -47,12 +57,17 @@ export default class DetailsPage extends Component {
                         }
                     </div>
                 </div>
+                  <div className="comments">
+                      <h1>Comments</h1>
+                      {comments}
+                  </div>
             </div>
         );
     }
 
     componentWillMount () {
         SeedModel.getSeedById(this.props.params.seedId, this.onLoadSuccess);
+        CommentModel.loadComments(this.onLoadComments);
     }
 
     onLoadSuccess (response) {
@@ -64,6 +79,20 @@ export default class DetailsPage extends Component {
             price: response.price,
             imageUrl: response.imageUrl
         });
+    }
+
+    onLoadComments(response){
+            let sorted = response.filter(c => c.seedId === this.state.seedId).sort(function (a,b) {
+                return new Date(b.dateCreated) - new Date(a.dateCreated);
+            });
+            let curr = [];
+            for (let i = 0; i < sorted.length; i++) {
+                curr.push(sorted[i]);
+            }
+
+            this.setState({
+                comments: curr
+            });
     }
 }
 
