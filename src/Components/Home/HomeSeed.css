@@ -1,4 +1,4 @@
-.team-box {
+.seed-box {
     width: 15em;
     border: 3px solid antiquewhite;
     padding: 10px;
@@ -6,11 +6,17 @@
     margin: 2px 5px;
 }
 
-.team-box > * {
+.seed-box > * {
     margin: 2px;
     padding: 2px;
     text-align: left;
 }
+
+.seed-box:hover {
+    color: white;
+    background-color: black;
+}
+
 img {
     height: 75px;
     width: 75px;

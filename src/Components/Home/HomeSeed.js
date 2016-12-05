@@ -4,7 +4,7 @@ import './HomeSeed.css';
 export default class HomeSeed extends Component {
     render () {
         return (
-            <div onClick={this.props.onClick} className="team-box" data-seed-id={this.props.seedId}>
+            <div onClick={this.props.onClick} className="seed-box" data-seed-id={this.props.seedId}>
                 <span>Name: <h1>{this.props.name}</h1></span>
                 <br />
                 <span>Price: {this.props.price}</span>
