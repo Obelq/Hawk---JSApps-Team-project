@@ -23,18 +23,17 @@ export default class DetailsPage extends Component {
                     <img className="img-responsive" src={this.state.imageUrl} alt="Seed" />
                     <div className="caption-full">
                         <h4 className="pull-right">${this.state.price}</h4>
-                        <h4>{this.state.name}</h4>
+                        <h1>{this.state.name}</h1>
                         <p>{this.state.description}</p>
                         <input
                             type="button"
-                            value="Edit" 
+                            value="Edit"
                             className="btn btn-primary"
                             onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
                         />
-
                         <input
                             type="button"
-                            value="Delete" 
+                            value="Delete"
                             className="btn btn-danger"
                             onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
                         />
@@ -64,3 +63,6 @@ export default class DetailsPage extends Component {
  DetailsPage.contextTypes = {
      router: React.PropTypes.object
  };
+function validate(state) {
+
+}
