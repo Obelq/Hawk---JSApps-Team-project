@@ -37,7 +37,7 @@ export default class App extends Component {
 						</li>
 						<li>
 							{
-							sessionStorage.getItem('username') == 'admin' ?
+							sessionStorage.getItem('username') === 'admin' ?
 								<Link to="/create">
 									Create
 								</Link>

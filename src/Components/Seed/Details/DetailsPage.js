@@ -26,7 +26,7 @@ export default class DetailsPage extends Component {
                         <h1>{this.state.name}</h1>
                         <p>{this.state.description}</p>
                         {
-                            sessionStorage.getItem('username') == 'admin' ?
+                            sessionStorage.getItem('username') === 'admin' ?
                                 <input
                                     type="button"
                                     value="Edit"
@@ -36,7 +36,7 @@ export default class DetailsPage extends Component {
                             :undefined}
 
                         {
-                            sessionStorage.getItem('username') == 'admin'?
+                            sessionStorage.getItem('username') === 'admin'?
                                 <input
                                     type="button"
                                     value="Delete"
