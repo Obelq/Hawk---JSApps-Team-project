@@ -29,7 +29,6 @@ export default class CatalogPage extends Component {
     onSubmitHandler (event) {
 
         event.preventDefault();
-
         let searchText = event.target.children[0].value;
         this.setState({
             searchText: searchText
@@ -39,20 +38,22 @@ export default class CatalogPage extends Component {
     render () {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
-            return <Seed key={index}
-                        name={seed.name}
-                        price={seed.price}
-                        location={seed.location}
-                        imageUrl={seed.imageUrl}
-                        seedId={seed._id}
-                        seedCreator={seed._acl.creator}
-                        onClick={_self.handleOnClickEvent}
-                    />
+            if(seed.name.indexOf(_self.state.searchText)!=-1||seed.description.indexOf(_self.state.searchText)!=-1) {
+                return <Seed key={index}
+                             name={seed.name}
+                             price={seed.price}
+                             location={seed.location}
+                             imageUrl={seed.imageUrl}
+                             seedId={seed._id}
+                             seedCreator={seed._acl.creator}
+                             onClick={_self.handleOnClickEvent}
+                />
+            }
         });
 
         return (
             <div>
-                <Form onsubmit={this.onSubmitHandler}/>
+                <Form onsubmit={this.onSubmitHandler.bind(this)}/>
                 <h1>Catalog Page</h1>
                 <table className="table"><tbody>
                 <tr>
