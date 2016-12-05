@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './HomeSeed.css';
 import { Link } from 'react-router';
 
-export default class Seed extends Component {
+export default class HomeSeed extends Component {
     render () {
         return (
             <div className="team-box">
-                <span>Name: {this.props.name}</span>
+                <span>Name: <h1>{this.props.name}</h1></span>
                 <br />
                 <span>Price: {this.props.price}</span>
                 <br />
