@@ -22,10 +22,9 @@ export default class CatalogPage extends Component {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
     }
     onSubmitHandler (event) {
-
         event.preventDefault();
         let searchText = event.target.children[0].value;
-        console.log(searchText)
+        alert()
         this.setState({
             searchText: searchText
         })
@@ -34,7 +33,7 @@ export default class CatalogPage extends Component {
     render () {
         return (
             <div>
-                <Form onSubmit={this.onSubmitHandler}/>
+                <Form onsubmit={this.onSubmitHandler}/>
                 <h1>Catalog Page</h1>
                 <table><tbody>
                 <tr>
