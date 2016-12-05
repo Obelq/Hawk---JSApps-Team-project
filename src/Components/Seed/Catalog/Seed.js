@@ -7,9 +7,12 @@ export default class Seed extends Component {
         return (
             <tr className="seed-row" >
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.name}</td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img src={this.props.imageUrl} alt="Snimka"/></td>
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.price}$</td>
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.location}</td>
-                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img src={this.props.imageUrl} alt="Snimka"/></td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.discount}</td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.producer}</td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.model}</td>
                 <td>
                     <input
                         className="btn btn-primary"

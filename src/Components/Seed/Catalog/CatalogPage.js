@@ -47,6 +47,9 @@ export default class CatalogPage extends Component {
                              name={seed.name}
                              price={seed.price}
                              location={seed.location}
+                             discount={seed.discount}
+                             producer={seed.producer}
+                             model={seed.model}
                              imageUrl={seed.imageUrl}
                              seedId={seed._id}
                              seedCreator={seed._acl.creator}
@@ -56,16 +59,7 @@ export default class CatalogPage extends Component {
                 />
             }
             
-            return <Seed key={index}
-                        name={seed.name}
-                        price={seed.price}
-                        location={seed.location}
-                        imageUrl={seed.imageUrl}
-                        seedId={seed._id}
-                        seedCreator={seed._acl.creator}
-                        onClick={_self.handleOnClickEvent}
-                        addToCart={_self.handleAddToCartEvent}
-                    />
+            return undefined;
         });
 
         return (
@@ -77,9 +71,12 @@ export default class CatalogPage extends Component {
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Image</th>
                                 <th>Price</th>
                                 <th>Location</th>
-                                <th>Image</th>
+                                <th>Discount</th>
+                                <th>Producer</th>
+                                <th>Model</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
