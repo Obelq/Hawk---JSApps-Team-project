@@ -14,7 +14,7 @@ export default class Seed extends Component {
                     <input
                         className="btn btn-primary"
                         type="button"
-                        name="addToCart"
+                        name="addToChart"
                         value="Add to cart"
                         data-seed-name={this.props.name}
                         data-seed-price={this.props.price}

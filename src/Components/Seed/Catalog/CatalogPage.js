@@ -42,7 +42,7 @@ export default class CatalogPage extends Component {
     render () {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
-            if(seed.name.indexOf(_self.state.searchText)!==-1||seed.description.indexOf(_self.state.searchText)!==-1) {
+            if (seed.name.indexOf(_self.state.searchText) !== -1 || seed.description.indexOf(_self.state.searchText) !== -1) {
                 return <Seed key={index}
                              name={seed.name}
                              price={seed.price}
@@ -125,7 +125,7 @@ export default class CatalogPage extends Component {
         
         let shoppingCartItems = this.state.shoppingCartItems;
         shoppingCartItems.push(newItem);
-        console.log(shoppingCartItems);
+
         this.setState({
             shoppingCartItems: shoppingCartItems
         });
