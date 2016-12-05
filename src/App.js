@@ -36,9 +36,13 @@ export default class App extends Component {
 							</Link>
 						</li>
 						<li>
-							<Link to="/create">
-								Create
-							</Link>
+							{
+							sessionStorage.getItem('username') === 'admin' ?
+								<Link to="/create">
+									Create
+								</Link>
+							:undefined
+							}
 						</li>
 						<li>
 							<Link to="/about">
@@ -51,25 +55,24 @@ export default class App extends Component {
 							</Link>
 						</li>
 					</Header>
-					<div className="page-content-wrapper container">
-						<div className="page-content inset">
-							<div className="row">
-								<div className="col-md-12 well lead">
-									{this.props.children}	
-								</div>
-							</div>
-						</div>
+					<div className="container" id="main-page-content">
+						{this.props.children}
 					</div>
 				</div>
 			);
 		}
 
 		return (
-			<div id="wrapper" className="active">
+			<div id="wrapper" className="container active">
 				<Header isLoggedIn={this.state.isLoggedIn} username={this.state.username}>
 					<li>
 						<Link to="/">
 							Home
+						</Link>
+					</li>
+					<li>
+						<Link to="/catalog">
+							Catalog
 						</Link>
 					</li>
 					<li>
@@ -88,14 +91,8 @@ export default class App extends Component {
 						</Link>
 					</li>
 				</Header>
-				<div className="page-content-wrapper container">
-					<div className="page-content inset">
-						<div className="row">
-							<div className="col-md-12 well lead">
-								{this.props.children}	
-							</div>
-						</div>
-					</div>
+				<div className="container" id="main-page-content">
+					{this.props.children}
 				</div>
 			</div>
 		);

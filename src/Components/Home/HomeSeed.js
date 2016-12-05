@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './HomeSeed.css';
-import { Link } from 'react-router';
 
 export default class HomeSeed extends Component {
     render () {
         return (
-            <div className="team-box">
+            <div onClick={this.props.onClick} className="seed-box" data-seed-id={this.props.seedId}>
                 <span>Name: <h1>{this.props.name}</h1></span>
                 <br />
                 <span>Price: {this.props.price}</span>

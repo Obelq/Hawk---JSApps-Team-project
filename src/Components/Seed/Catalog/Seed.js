@@ -5,11 +5,22 @@ import './Seed.css';
 export default class Seed extends Component {
     render () {
         return (
-            <tr className="seed-row" onClick={this.props.onClick} data-seed-id={this.props.seedId}>
-                <td>{this.props.name}</td>
-                <td>{this.props.price}$</td>
-                <td>{this.props.location}</td>
-                <td><img src={this.props.imageUrl} alt="Snimka"/></td>
+            <tr className="seed-row" >
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.name}</td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.price}$</td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.location}</td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img src={this.props.imageUrl} alt="Snimka"/></td>
+                <td>
+                    <input
+                        className="btn btn-primary"
+                        type="button"
+                        name="addToChart"
+                        value="Add to chart"
+                        data-seed-name={this.props.name}
+                        data-seed-price={this.props.price}
+                        onClick={this.props.addToChart}
+                    />
+                </td>
             </tr>
         );
     }
