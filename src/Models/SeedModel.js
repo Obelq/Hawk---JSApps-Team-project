@@ -23,7 +23,7 @@ export default class SeedModel {
     }
 
     static loadSeeds (callback) {
-        Requester.get('appdata', 'seeds', 'kinvey')
+        Requester.get('appdata', 'seeds', 'guest')
             .then(callback);
     }
 
@@ -80,7 +80,7 @@ export default class SeedModel {
     }
 
     static getSeedById(seedId, callback) {
-        Requester.get('appdata', `seeds/` + seedId, 'kinvey')
+        Requester.get('appdata', `seeds/` + seedId, 'guest')
             .then(callback);
     }
 }

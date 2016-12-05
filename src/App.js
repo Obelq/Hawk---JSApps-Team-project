@@ -36,9 +36,13 @@ export default class App extends Component {
 							</Link>
 						</li>
 						<li>
-							<Link to="/create">
-								Create
-							</Link>
+							{
+							sessionStorage.getItem('username') == 'admin' ?
+								<Link to="/create">
+									Create
+								</Link>
+							:undefined
+							}
 						</li>
 						<li>
 							<Link to="/about">
@@ -70,6 +74,11 @@ export default class App extends Component {
 					<li>
 						<Link to="/">
 							Home
+						</Link>
+					</li>
+					<li>
+						<Link to="/catalog">
+							Catalog
 						</Link>
 					</li>
 					<li>

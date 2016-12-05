@@ -25,18 +25,26 @@ export default class DetailsPage extends Component {
                         <h4 className="pull-right">${this.state.price}</h4>
                         <h1>{this.state.name}</h1>
                         <p>{this.state.description}</p>
-                        <input
-                            type="button"
-                            value="Edit"
-                            className="btn btn-primary"
-                            onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
-                        />
-                        <input
-                            type="button"
-                            value="Delete"
-                            className="btn btn-danger"
-                            onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
-                        />
+                        {
+                            sessionStorage.getItem('username') == 'admin' ?
+                                <input
+                                    type="button"
+                                    value="Edit"
+                                    className="btn btn-primary"
+                                    onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
+                                />
+                            :undefined}
+
+                        {
+                            sessionStorage.getItem('username') == 'admin'?
+                                <input
+                                    type="button"
+                                    value="Delete"
+                                    className="btn btn-danger"
+                                    onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
+                                 />
+                            :undefined
+                        }
                     </div>
                 </div>
             </div>
@@ -63,6 +71,3 @@ export default class DetailsPage extends Component {
  DetailsPage.contextTypes = {
      router: React.PropTypes.object
  };
-function validate(state) {
-
-}
