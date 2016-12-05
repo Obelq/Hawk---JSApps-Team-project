@@ -57,16 +57,36 @@ export default class DetailsPage extends Component {
                         }
                     </div>
                 </div>
-                  <div className="comments">
+                  <div className="createComment">
                       <h1>Comments</h1>
                       {comments}
                   </div>
+                  <form onSubmit={this.props.onSubmit}>
+                      <div className="form-group">
+                          <h1>Create new comment</h1>
+                          <label>Content</label>
+                          <input
+                              className="form-control"
+                              type="text"
+                              name="content"
+                              value={this.props.content}
+                              onChange={this.props.onChange}
+                              required
+                          />
+                      </div>
+                      <input
+                          className="btn btn-default"
+                          type="submit" value="Create"
+                          disabled={this.props.isDisabled}
+                      />
+                  </form>
             </div>
         );
     }
 
     componentWillMount () {
         SeedModel.getSeedById(this.props.params.seedId, this.onLoadSuccess);
+        CommentModel.create(this.props.content,sessionStorage.getItem('username'),this.props.date)
     }
 
     onLoadSuccess (response) {

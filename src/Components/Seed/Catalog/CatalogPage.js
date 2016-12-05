@@ -30,7 +30,6 @@ export default class CatalogPage extends Component {
 
 
     onSubmitHandler (event) {
-
         event.preventDefault();
 
         let searchText = event.target.children[0].value;
