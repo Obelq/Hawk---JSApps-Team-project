@@ -118,3 +118,42 @@ h1 span {
     color: white;
 }
 
+.shopping-chart{
+    text-align: right;
+}
+
+.shopping-chart h3{
+    color: white;
+    background-color: #167F92;
+    padding: 10px;
+}
+
+.shopping-chart-item {
+    text-align: right;
+}
+
+.container {
+    padding: 0;
+}
+
+.row {
+    padding-top: 20px;
+}
+
+
+.catalog-container {
+    position: relative;
+}
+
+.shopping-chart-container {
+    position: absolute;
+    top: 20px;
+    right: -300px;
+}
+
+.remove-item-btn {
+    color: white;
+    background-color: red;
+    padding: 2px;
+    border-radius: 5px;
+}

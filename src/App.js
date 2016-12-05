@@ -55,21 +55,15 @@ export default class App extends Component {
 							</Link>
 						</li>
 					</Header>
-					<div className="page-content-wrapper container">
-						<div className="page-content inset">
-							<div className="row">
-								<div className="col-md-12 well lead">
-									{this.props.children}	
-								</div>
-							</div>
-						</div>
+					<div className="container" id="main-page-content">
+						{this.props.children}
 					</div>
 				</div>
 			);
 		}
 
 		return (
-			<div id="wrapper" className="active">
+			<div id="wrapper" className="container active">
 				<Header isLoggedIn={this.state.isLoggedIn} username={this.state.username}>
 					<li>
 						<Link to="/">
@@ -97,14 +91,8 @@ export default class App extends Component {
 						</Link>
 					</li>
 				</Header>
-				<div className="page-content-wrapper container">
-					<div className="page-content inset">
-						<div className="row">
-							<div className="col-md-12 well lead">
-								{this.props.children}	
-							</div>
-						</div>
-					</div>
+				<div className="container" id="main-page-content">
+					{this.props.children}
 				</div>
 			</div>
 		);
