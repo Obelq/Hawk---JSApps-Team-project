@@ -25,6 +25,19 @@ export default class DetailsPage extends Component {
                         <h4 className="pull-right">${this.state.price}</h4>
                         <h4>{this.state.name}</h4>
                         <p>{this.state.description}</p>
+                        <input
+                            type="button"
+                            value="Edit" 
+                            className="btn btn-primary"
+                            onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
+                        />
+
+                        <input
+                            type="button"
+                            value="Delete" 
+                            className="btn btn-danger"
+                            onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
+                        />
                     </div>
                 </div>
             </div>
@@ -37,6 +50,7 @@ export default class DetailsPage extends Component {
 
     onLoadSuccess (response) {
         this.setState({
+            seedId: response._id,
             name: response.name,
             location: response.location,
             description: response.description,
@@ -45,3 +59,8 @@ export default class DetailsPage extends Component {
         });
     }
 }
+
+
+ DetailsPage.contextTypes = {
+     router: React.PropTypes.object
+ };

@@ -16,6 +16,8 @@ export default class EditPage extends Component {
             imageUrl: '',
             discount: 0,
             category: '',
+            model: '',
+            producer: '',
             isDisabled: true
         };
 
@@ -37,6 +39,8 @@ export default class EditPage extends Component {
                     location={this.state.location}
                     imageUrl={this.state.imageUrl}
                     category={this.state.category}
+                    model={this.state.model}
+                    producer={this.state.producer}
                     onChange={this.onChangeHandler}
                     onSubmit={this.onSubmitHandler}
                     discount={this.state.discount}
@@ -73,8 +77,10 @@ export default class EditPage extends Component {
                 this.state.price,
                 this.state.location,
                 this.state.imageUrl,
-                this.discount,
-                this.categoryId,
+                this.state.discount,
+                this.state.categoryId,
+                this.state.model,
+                this.state.producer,
                 this.onEditSuccess
             );
 
@@ -90,6 +96,7 @@ export default class EditPage extends Component {
 
     onCategoryLoadSuccess (response) {
         this.setState({
+            categoryId: response._id,
             category: response.name
         });
     }
@@ -102,6 +109,8 @@ export default class EditPage extends Component {
             price: response.price,
             imageUrl: response.imageUrl,
             discount: response.discount,
+            model: response.model,
+            producer: response.producer,
             isDisabled: false
         });
 

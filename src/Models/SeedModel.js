@@ -47,7 +47,7 @@ export default class SeedModel {
             .then(callback);
     }
 
-    static edit (seedId, name, description, price, location, imageUrl, discount, categoryId, callback) {
+    static edit (seedId, name, description, price, location, imageUrl, discount, categoryId, model, producer, callback) {
         let seedData = {
             name: name,
             price: Number(price),
@@ -55,7 +55,10 @@ export default class SeedModel {
             imageUrl: imageUrl,
             location: location,
             discount: Number(discount),
-            categoryId: categoryId
+            model: model,
+            producer: producer,
+            categoryId: categoryId,
+            dateCreated: new Date()
         };
 
         Requester

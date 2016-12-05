@@ -15,7 +15,9 @@ export default class EditPage extends Component {
             location: '',
             imageUrl: '',
             discount: 0,
-            category: ''
+            category: '',
+            model: '',
+            producer: ''
         };
 
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -35,6 +37,8 @@ export default class EditPage extends Component {
                     location={this.state.location}
                     imageUrl={this.state.imageUrl}
                     discount={this.state.discount}
+                    model={this.state.model}
+                    producer={this.state.producer}
                     category={this.state.category}
                     onSubmit={this.onSubmitHandler}
                 />
@@ -62,7 +66,9 @@ export default class EditPage extends Component {
             price: response.price,
             location: response.location,
             imageUrl: response.imageUrl,
-            discount: response.discount
+            discount: response.discount,
+            model: response.model,
+            producer: response.producer
         });
 
         CategoryModel.getCategoryById(response.categoryId, this.onCategoryLoadSuccess);
