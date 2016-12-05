@@ -67,7 +67,6 @@ export default class DetailsPage extends Component {
 
     componentWillMount () {
         SeedModel.getSeedById(this.props.params.seedId, this.onLoadSuccess);
-        CommentModel.loadComments(this.onLoadComments);
     }
 
     onLoadSuccess (response) {
@@ -79,9 +78,11 @@ export default class DetailsPage extends Component {
             price: response.price,
             imageUrl: response.imageUrl
         });
+
+        CommentModel.loadComments(this.onLoadComments);
     }
 
-    onLoadComments(response){
+    onLoadComments(response) {
             let sorted = response.filter(c => c.seedId === this.state.seedId).sort(function (a,b) {
                 return new Date(b.dateCreated) - new Date(a.dateCreated);
             });
