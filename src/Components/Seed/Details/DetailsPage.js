@@ -25,19 +25,20 @@ export default class DetailsPage extends Component {
                         <h4 className="pull-right">${this.state.price}</h4>
                         <h4>{this.state.name}</h4>
                         <p>{this.state.description}</p>
-                        <input
+                        {sessionStorage.getItem('username')=='admin'?<input
                             type="button"
-                            value="Edit" 
+                            value="Edit"
                             className="btn btn-primary"
                             onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
-                        />
+                        />:undefined}
 
-                        <input
+
+                        {sessionStorage.getItem('username')=='admin'?<input
                             type="button"
                             value="Delete" 
                             className="btn btn-danger"
                             onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
-                        />
+                        />:undefined}
                     </div>
                 </div>
             </div>

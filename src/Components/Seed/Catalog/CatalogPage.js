@@ -38,6 +38,7 @@ export default class CatalogPage extends Component {
     render () {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
+            console.log(seed)
             if(seed.name.indexOf(_self.state.searchText)!=-1||seed.description.indexOf(_self.state.searchText)!=-1) {
                 return <Seed key={index}
                              name={seed.name}
