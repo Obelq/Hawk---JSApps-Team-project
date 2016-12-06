@@ -138,6 +138,7 @@ h1 span {
 
 .row {
     padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 
@@ -146,9 +147,7 @@ h1 span {
 }
 
 .shopping-cart-container {
-    position: absolute;
-    top: 20px;
-    right: -300px;
+    margin-right: -200px;
 }
 
 .remove-item-btn {
@@ -156,5 +155,15 @@ h1 span {
     background-color: red;
     padding: 2px;
     border-radius: 5px;
+}
+.row-shopping{
+
+}
+
+.yani-row {
+    position: relative;
+}
+.shopping-cart-container > * {
+    float: right;
 }
 

@@ -26,6 +26,7 @@ export default class Seed extends Component {
                 </td>
         }
 
+
         return (
             <tr className="seed-row" >
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.name}</td>

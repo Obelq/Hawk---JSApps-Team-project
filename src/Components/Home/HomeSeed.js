@@ -49,7 +49,16 @@ export default class HomeSeed extends Component {
                                     </li>
                                     {priceLi}
                                     <li className="list-group-item">
-                                        <input id="submit" className="btn-block btn btn-default" type="submit" value="Buy!" name="submit" />
+                                        <input onClick={this.props.addToCart}
+                                               id="submit"
+                                               className="btn-block btn btn-default"
+                                               type="button"
+                                               value="Buy!"
+                                               name="submit"
+                                               data-seed-name={this.props.name}
+                                               data-seed-price={this.props.price}
+                                               data-seed-discount={this.props.discount}
+                                        />
                                     </li>
                                 </ul>
                             <input type="hidden" name="productID" id="productID" value="7" className="ccm-input-hidden" />
@@ -70,4 +79,3 @@ export default class HomeSeed extends Component {
 HomeSeed.contextTypes = {
     router: React.PropTypes.object
 };
-

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SeedModel from '../../../Models/SeedModel';
-import Seed from './Seed';
+import HomeSeed from '../../Home/HomeSeed';
 import ShoppingCart from './ShoppingCart';
 let Form = React.createClass({
     render: function () {
@@ -63,7 +63,7 @@ export default class CatalogPage extends Component {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
             if (_self.searchParams(_self.state.searchBy, _self, seed)) {
-                return <Seed key={index}
+                return <HomeSeed key={index}
                              name={seed.name}
                              price={seed.price}
                              location={seed.location}
@@ -78,38 +78,22 @@ export default class CatalogPage extends Component {
 
                 />
             }
-            
-            return undefined;
         });
 
         return (
 
-            <div className="row">
-                <div className="catalog-container col-sm-8">
-                    <Form onsubmit={this.onSubmitHandler.bind(this)}/>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Price</th>
-                                <th>Location</th>
-                                <th>Discount</th>
-                                <th>Producer</th>
-                                <th>Model</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {newestSeeds}
-                        </tbody>
-                    </table>
 
-                    <ShoppingCart
-                        items={this.state.shoppingCartItems}
-                        removeItem={_self.removeCartItem}
-                    />
+            <div className="yani-row">
+                <ShoppingCart
+                    items={this.state.shoppingCartItems}
+                    removeItem={_self.removeCartItem}
+                />
+                <Form onsubmit={this.onSubmitHandler.bind(this)}/>
+
+                <div className="catalog-items-container">
+                    {newestSeeds}
                 </div>
+
             </div>
         );
     }
@@ -140,7 +124,6 @@ export default class CatalogPage extends Component {
             discount: event.currentTarget.getAttribute('data-seed-discount')
         };
 
-        
         let shoppingCartItems = this.state.shoppingCartItems;
         shoppingCartItems.push(newItem);
 

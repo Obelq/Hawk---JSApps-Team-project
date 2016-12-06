@@ -17,10 +17,6 @@
     background-color: black;
 }
 
-img {
-    height: 75px;
-    width: 75px;
-}
 
 table {
     margin: 1em 0;
@@ -120,4 +116,8 @@ h1 span {
     color: #f2f2f2;
     border-radius: 20px;
     padding: 10px;
+}
+
+.row{
+    padding-bottom: 20px;
 }
