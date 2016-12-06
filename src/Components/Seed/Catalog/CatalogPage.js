@@ -26,7 +26,7 @@ export default class CatalogPage extends Component {
             seeds: [],
             categoryId: '',
             searchText: '',
-            searchBy: 'name',
+            searchBy: '',
             shoppingCartItems: []
         };
 
@@ -43,14 +43,26 @@ export default class CatalogPage extends Component {
         let searchText = event.target.children[0].value;
         let searchBy = event.target.children[2].value;
         this.setState({
-            searchText: searchText
+            searchText: searchText,
+            searchBy: searchBy
         })
+    }
+    searchParams (criteria, self, seed) {
+         if (criteria == "location") {
+            return (seed.location.indexOf(self.state.searchText) !== -1);
+        } else if (criteria == "producer") {
+            return (seed.producer.indexOf(self.state.searchText) !== -1);
+        } else if (criteria == "model") {
+            return (seed.model.indexOf(self.state.searchText) !== -1);
+        } else {
+            return (seed.name.indexOf(self.state.searchText) !== -1 || seed.description.indexOf(self.state.searchText) !== -1);
+        }
     }
 
     render () {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
-            if (seed.name.indexOf(_self.state.searchText) !== -1 || seed.description.indexOf(_self.state.searchText) !== -1) {
+            if (_self.searchParams(_self.state.searchBy, _self, seed)) {
                 return <Seed key={index}
                              name={seed.name}
                              price={seed.price}
