@@ -48,11 +48,11 @@ export default class CatalogPage extends Component {
         });
     }
     searchParams (criteria, self, seed) {
-         if (criteria == "location") {
+         if (criteria === "location") {
             return (seed.location.indexOf(self.state.searchText) !== -1);
-        } else if (criteria == "producer") {
+        } else if (criteria === "producer") {
             return (seed.producer.indexOf(self.state.searchText) !== -1);
-        } else if (criteria == "model") {
+        } else if (criteria === "model") {
             return (seed.model.indexOf(self.state.searchText) !== -1);
         } else {
             return (seed.name.indexOf(self.state.searchText) !== -1 || seed.description.indexOf(self.state.searchText) !== -1);
