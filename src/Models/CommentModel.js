@@ -8,7 +8,6 @@ export default class CommentModel {
             seedId: seedId,
             date: new Date()
         };
-
         Requester
             .post('appdata', 'comments', 'kinvey', commentData)
             .then((response) => callback(response))
@@ -17,7 +16,7 @@ export default class CommentModel {
 
     static loadComments (callback) {
         Requester.get('appdata', 'comments', 'guest')
-            .then(callback);
+            .then((response) => callback(response));
     }
 
     static edit (content, authorName, seedId, callback) {
@@ -34,9 +33,9 @@ export default class CommentModel {
             .catch(() => callback(false));
     }
 
-    static delete (seedId, callback) {
+    static delete (commentId, callback) {
         Requester
-            .delete('appdata', `comments/${seedId}`, 'kinvey')
+            .delete('appdata', `comments/${commentId}`, 'kinvey')
             .then(() => callback(true))
             .catch(() => callback(false));
     }

@@ -6,35 +6,36 @@ import CommentView from './CommentView';
 
 export default class DetailsPage extends Component {
     constructor(props) {
-         super(props);
-         this.state = {
-             name: '',
-             description: '',
-             location: '',
-             price: '',
-             imageUrl: '',
-             comments: [],
-             newCommentContent: ''
-         };
+        super(props);
+        this.state = {
+            name: '',
+            description: '',
+            location: '',
+            price: '',
+            imageUrl: '',
+            comments: [],
+            newCommentContent: ''
+        };
 
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
         this.onLoadComments = this.onLoadComments.bind(this);
         this.onCreateCommentHandler = this.onCreateCommentHandler.bind(this);
         this.onCommentFieldChangeHandler = this.onCommentFieldChangeHandler.bind(this);
         this.onCreateCommentSuccess =   this.onCreateCommentSuccess.bind(this);
-     }
+    }
 
     render() {
         let comments = this.state.comments.map(function (comment, index) {
             return <CommentView key={index}
+                                commentId={comment._id}
                                 authorName={comment.authorName}
                                 content={comment.content}
                                 date={comment.date}
-                   />
+            />
         });
 
-          return (
-              <div className="col-md-9">
+        return (
+            <div className="col-md-9">
                 <div className="thumbnail">
                     <img className="img-responsive" src={this.state.imageUrl} alt="Seed" />
                     <div className="caption-full">
@@ -63,30 +64,30 @@ export default class DetailsPage extends Component {
                         }
                     </div>
                 </div>
-                  <div className="createComment">
-                      <h1>Comments</h1>
-                      {comments.length > 0 ? comments: 'No comments'}
-                  </div>
-                  <form onSubmit={this.onCreateCommentHandler}>
-                      <div className="form-group">
-                          <h1>Create new comment</h1>
-                          <label>Content</label>
-                          <input
-                              id="new-comment-content"
-                              className="form-control"
-                              type="text"
-                              name="newCommentContent"
-                              value={this.props.content}
-                              onChange={this.onCommentFieldChangeHandler}
-                              required
-                          />
-                      </div>
-                      <input
-                          className="btn btn-default"
-                          type="submit" value="Create"
-                          disabled={this.props.isDisabled}
-                      />
-                  </form>
+                <div className="createComment">
+                    <h1>Comments</h1>
+                    {comments.length > 0 ? comments: 'No comments'}
+                </div>
+                <form onSubmit={this.onCreateCommentHandler}>
+                    <div className="form-group">
+                        <h1>Create new comment</h1>
+                        <label>Content</label>
+                        <input
+                            id="new-comment-content"
+                            className="form-control"
+                            type="text"
+                            name="newCommentContent"
+                            value={this.props.content}
+                            onChange={this.onCommentFieldChangeHandler}
+                            required
+                        />
+                    </div>
+                    <input
+                        className="btn btn-default"
+                        type="submit" value="Create"
+                        disabled={this.props.isDisabled}
+                    />
+                </form>
             </div>
         );
     }
@@ -95,7 +96,6 @@ export default class DetailsPage extends Component {
         event.preventDefault();
 
         let content = this.state.newCommentContent;
-        let date = new Date();
         let authorName = sessionStorage.getItem('username') || 'anonymous';
 
         CommentModel
@@ -121,9 +121,8 @@ export default class DetailsPage extends Component {
 
     componentWillMount () {
         SeedModel.getSeedById(this.props.params.seedId, this.onLoadSuccess);
-        CommentModel.create(this.props.content,sessionStorage.getItem('username'),this.state.seedId,this.props.date)
     }
-    
+
     onLoadSuccess (response) {
         this.setState({
             seedId: response._id,
@@ -138,21 +137,20 @@ export default class DetailsPage extends Component {
     }
 
     onLoadComments(response) {
-            let sorted = response.filter(c => c.seedId === this.state.seedId).sort(function (a,b) {
-                return new Date(b.dateCreated) - new Date(a.dateCreated);
-            });
-            let curr = [];
-            for (let i = 0; i < sorted.length; i++) {
-                curr.push(sorted[i]);
-            }
+        let sorted = response.filter(c => c.seedId === this.state.seedId).sort(function (a,b) {
+            return new Date(b.dateCreated) - new Date(a.dateCreated);
+        });
+        let curr = [];
+        for (let i = 0; i < sorted.length; i++) {
+            curr.push(sorted[i]);
+        }
 
-            this.setState({
-                comments: curr
-            });
+        this.setState({
+            comments: curr
+        });
     }
 }
 
-
- DetailsPage.contextTypes = {
-     router: React.PropTypes.object
- };
+DetailsPage.contextTypes = {
+    router: React.PropTypes.object
+};

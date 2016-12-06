@@ -43,8 +43,9 @@ export default class CatalogPage extends Component {
         let searchText = event.target.children[0].value;
         let searchBy = event.target.children[2].value;
         this.setState({
-            searchText: searchText
-        })
+            searchText: searchText,
+            searchBy: searchBy
+        });
     }
 
     render () {
