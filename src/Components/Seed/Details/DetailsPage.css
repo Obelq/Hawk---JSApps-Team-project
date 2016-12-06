@@ -13,6 +13,11 @@
     background: yellow;
 }
 
+img {
+    height: 100%;
+    width: auto;
+}
+
 .title{
     background-color: #333;
     color: #f2f2f2;
@@ -23,3 +28,11 @@
     border-radius: 15px;
     text-align: center;
 }
+.confirm-delete-text {
+    font-weight: bolder;
+    color: red;
+    font-size: 20px;
+}
+/*.comment-container {*/
+    /*border: 2px solid red;*/
+/*}*/

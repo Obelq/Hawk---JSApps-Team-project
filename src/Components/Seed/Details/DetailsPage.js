@@ -13,6 +13,7 @@ export default class DetailsPage extends Component {
             location: '',
             price: '',
             imageUrl: '',
+            dateCreated: '',
             comments: [],
             newCommentContent: ''
         };
@@ -26,75 +27,59 @@ export default class DetailsPage extends Component {
 
     render() {
         let _self = this;
-        let comments = this.state.comments.map(function (comment, index) {
-            return <CommentView key={index}
-                                commentId={comment._id}
-                                authorName={comment.authorName}
-                                content={comment.content}
-                                date={comment.date}
-                                seedId={_self.props.params.seedId}
-                                refreshComments={_self.onCreateCommentSuccess}
-            />
+        let comments =
+            this.state.comments
+            .sort((a, b) => {
+                return b.date - a.date;
+            })
+            .map(function (comment, index) {
+                return <CommentView key={index}
+                                    commentId={comment._id}
+                                    authorName={comment.authorName}
+                                    content={comment.content}
+                                    date={comment.date}
+                                    seedId={_self.props.params.seedId}
+                                    refreshComments={_self.onCreateCommentSuccess}
+                />
         });
 
         return (
-            <div className="row">
-                <div className="thumbnail">
-                    <img className="img-responsive" src={this.state.imageUrl} alt="Seed" />
-                    <div className="caption-full">
-                        <h4 className="pull-right">${this.state.price}</h4>
-                        <h1>{this.state.name}</h1>
-                        <p>{this.state.description}</p>
-                        {
-                            sessionStorage.getItem('username') === 'admin' ?
-                                <input
-                                    type="button"
-                                    value="Edit"
-                                    className="btn btn-primary"
-                                    onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
-                                />
-                                :undefined}
+            <div className="col-lg-8">
+                <h1>{this.state.name}</h1>
+                <p className="lead">
+                    Price: <a href="#">{this.state.price}</a>
+                </p>
+                <hr/>
+                    <p><span className="glyphicon glyphicon-time"></span> {this.state.dateCreated}</p>
+                    <hr/>
+                    <img className="img-responsive" src={this.state.imageUrl} alt=""/>
+                    <hr/>
+                    <p className="lead">
+                        Description: <br />
+                        {this.state.description}
+                    </p>
+                    <hr/>
 
-                        {
-                            sessionStorage.getItem('username') === 'admin'?
-                                <input
-                                    type="button"
-                                    value="Delete"
-                                    className="btn btn-danger"
-                                    onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
+                    <div className="well">
+                        <h4>Leave a Comment:</h4>
+                        <form onSubmit={this.onCreateCommentHandler}>
+                            <div className="form-group">
+                                <textarea
+                                    className="form-control"
+                                    rows="3"
+                                    id="new-comment-content"
+                                    name="newCommentContent"
+                                    value={this.props.content}
+                                    onChange={this.onCommentFieldChangeHandler}
+                                    required
                                 />
-                                :undefined
-                        }
+                            </div>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                        </form>
                     </div>
-                </div>
-                <div className="createComment">
-                    <h1 className="title">Comments</h1>
-                    {comments.length > 0 ? comments: 'No comments'}
-                </div>
-                <form onSubmit={this.onCreateCommentHandler}>
-                    <div className="form-group">
-                        <h1 className="title">Create new comment</h1>
-                        <div id="createComment">
-                            <label><h3>Content:</h3></label>
-                            <input
-                                id="new-comment-content"
-                                className="form-control"
-                                type="text"
-                                name="newCommentContent"
-                                value={this.props.content}
-                                onChange={this.onCommentFieldChangeHandler}
-                                required
-                            />
-                            <br/>
-                        <input
-                            className="btn btn-primary"
-                            type="submit" value="Create"
-                            disabled={this.props.isDisabled}
-                        />
-                    </div>
-                    </div>
-                </form>
+                    {comments}
             </div>
+
         );
     }
 
@@ -120,7 +105,7 @@ export default class DetailsPage extends Component {
         this.setState(newState);
     }
 
-    onCreateCommentSuccess (response) {
+    onCreateCommentSuccess () {
         CommentModel.loadComments(this.onLoadComments);
         document.getElementById('new-comment-content').value = '';
     }
@@ -136,6 +121,7 @@ export default class DetailsPage extends Component {
             location: response.location,
             description: response.description,
             price: response.price,
+            dateCreated: response.dateCreated,
             imageUrl: response.imageUrl
         });
 

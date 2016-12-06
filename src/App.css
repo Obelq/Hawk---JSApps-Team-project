@@ -29,9 +29,7 @@ textarea {
 }
 
 #main-page-content {
-
+    padding-left: 150px;
 }
 
-.row {
- padding-left: 80px;
-}
+
