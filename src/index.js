@@ -6,6 +6,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './Components/Home/HomePage';
 import CatalogPage from './Components/Seed/Catalog/CatalogPage';
 import AboutPage from './Components/About/AboutPage';
+import ContactsPage from './Components/Contacts/ContactsPage';
 import RegisterPage from './Components/Register/RegisterPage';
 import LoginPage from './Components/Login/LoginPage';
 import CreatePage from './Components/Seed/Create/CreatePage';
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route path="delete/:seedId" component={DeletePage} />
             <Route path="details/:seedId" component={DetailsPage} />
             <Route path="about" component={AboutPage} />
+            <Route path="contacts" component={ContactsPage} />
             <Route path="register" component={RegisterPage} />
             <Route path="login" component={LoginPage} />
             <Route path="logout" component={HomePage} />

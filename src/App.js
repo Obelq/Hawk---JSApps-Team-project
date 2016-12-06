@@ -50,6 +50,11 @@ export default class App extends Component {
 							</Link>
 						</li>
 						<li>
+							<Link to="/contacts">
+								Contacts
+							</Link>
+						</li>
+						<li>
 							<Link to="/logout" onClick={() => UserModel.logout(this.onLogout)}>
 								Logout
 							</Link>
@@ -78,6 +83,11 @@ export default class App extends Component {
 					<li>
 						<Link to="/about">
 							About
+						</Link>
+					</li>
+					<li>
+						<Link to="/contacts">
+							Contacts
 						</Link>
 					</li>
 					<li>

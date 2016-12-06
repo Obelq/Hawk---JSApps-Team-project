@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SeedModel from '../../Models/SeedModel';
 import HomeSeed from './HomeSeed';
+import './HomeSeed.css';
 
 export default class HomePage extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class HomePage extends Component {
         });
         return (
             <div className="row">
-                <h1>Home Page</h1>
+                <h1 className="title">Home Page</h1>
                     <div>
                     <h1>Just added</h1>
                     {lastestSeeds}

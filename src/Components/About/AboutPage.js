@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import '../../App.css';
 
 export default class AboutPage extends Component {
     render () {
         return (
             <div>
-                <h1>About Page</h1>
+                <h1 className="title">About Page</h1>
                 <div>
                     Главната ни дейност е дистрибуция на семена от реномирани световни марки.
 
