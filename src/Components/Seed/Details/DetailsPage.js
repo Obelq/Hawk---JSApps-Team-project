@@ -3,6 +3,7 @@ import SeedModel from '../../../Models/SeedModel.js';
 import CommentModel from '../../../Models/CommentModel.js';
 import CommentView from './CommentView';
 
+
 export default class DetailsPage extends Component {
     constructor(props) {
          super(props);
@@ -12,11 +13,15 @@ export default class DetailsPage extends Component {
              location: '',
              price: '',
              imageUrl: '',
-             comments: []
+             comments: [],
+             newCommentContent: ''
          };
 
-         this.onLoadSuccess = this.onLoadSuccess.bind(this);
-         this.onLoadComments = this.onLoadComments.bind(this);
+        this.onLoadSuccess = this.onLoadSuccess.bind(this);
+        this.onLoadComments = this.onLoadComments.bind(this);
+        this.onCreateCommentHandler = this.onCreateCommentHandler.bind(this);
+        this.onCommentFieldChangeHandler = this.onCommentFieldChangeHandler.bind(this);
+        this.onCreateCommentSuccess =   this.onCreateCommentSuccess.bind(this);
      }
 
     render() {
@@ -27,6 +32,7 @@ export default class DetailsPage extends Component {
                                 date={comment.date}
                    />
         });
+
           return (
               <div className="col-md-9">
                 <div className="thumbnail">
@@ -59,18 +65,19 @@ export default class DetailsPage extends Component {
                 </div>
                   <div className="createComment">
                       <h1>Comments</h1>
-                      {comments}
+                      {comments.length > 0 ? comments: 'No comments'}
                   </div>
-                  <form onSubmit={this.props.onSubmit}>
+                  <form onSubmit={this.onCreateCommentHandler}>
                       <div className="form-group">
                           <h1>Create new comment</h1>
                           <label>Content</label>
                           <input
+                              id="new-comment-content"
                               className="form-control"
                               type="text"
-                              name="content"
+                              name="newCommentContent"
                               value={this.props.content}
-                              onChange={this.props.onChange}
+                              onChange={this.onCommentFieldChangeHandler}
                               required
                           />
                       </div>
@@ -84,11 +91,39 @@ export default class DetailsPage extends Component {
         );
     }
 
-    componentWillMount () {
-        SeedModel.getSeedById(this.props.params.seedId, this.onLoadSuccess);
-        CommentModel.create(this.props.content,sessionStorage.getItem('username'),this.props.date)
+    onCreateCommentHandler (event) {
+        event.preventDefault();
+
+        let content = this.state.newCommentContent;
+        let date = new Date();
+        let authorName = sessionStorage.getItem('username') || 'anonymous';
+
+        CommentModel
+            .create(
+                content,
+                authorName,
+                this.props.params.seedId,
+                this.onCreateCommentSuccess
+            );
     }
 
+    onCommentFieldChangeHandler (event) {
+        event.preventDefault();
+        let newState = {};
+        newState[event.target.name] = event.target.value;
+        this.setState(newState);
+    }
+
+    onCreateCommentSuccess (response) {
+        CommentModel.loadComments(this.onLoadComments);
+        document.getElementById('new-comment-content').value = '';
+    }
+
+    componentWillMount () {
+        SeedModel.getSeedById(this.props.params.seedId, this.onLoadSuccess);
+        CommentModel.create(this.props.content,sessionStorage.getItem('username'),this.state.seedId,this.props.date)
+    }
+    
     onLoadSuccess (response) {
         this.setState({
             seedId: response._id,
