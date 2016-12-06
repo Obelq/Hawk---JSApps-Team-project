@@ -84,6 +84,7 @@ export default class HomePage extends Component {
         return <HomeSeed key={index}
             name={seed.name}
             price={seed.price}
+            discount={seed.discount}
             location={seed.location}
             imageUrl={seed.imageUrl}
             description={Cut(seed.description)}
