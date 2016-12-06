@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SeedModel from '../../../Models/SeedModel.js';
 import CommentModel from '../../../Models/CommentModel.js';
 import CommentView from './CommentView';
-
+import './DetailsPage.css';
 
 export default class DetailsPage extends Component {
     constructor(props) {
@@ -68,28 +68,31 @@ export default class DetailsPage extends Component {
                     </div>
                 </div>
                 <div className="createComment">
-                    <h1>Comments</h1>
+                    <h1 className="title">Comments</h1>
                     {comments.length > 0 ? comments: 'No comments'}
                 </div>
                 <form onSubmit={this.onCreateCommentHandler}>
                     <div className="form-group">
-                        <h1>Create new comment</h1>
-                        <label>Content</label>
+                        <h1 className="title">Create new comment</h1>
+                        <div id="createComment">
+                            <label><h3>Content:</h3></label>
+                            <input
+                                id="new-comment-content"
+                                className="form-control"
+                                type="text"
+                                name="newCommentContent"
+                                value={this.props.content}
+                                onChange={this.onCommentFieldChangeHandler}
+                                required
+                            />
+                            <br/>
                         <input
-                            id="new-comment-content"
-                            className="form-control"
-                            type="text"
-                            name="newCommentContent"
-                            value={this.props.content}
-                            onChange={this.onCommentFieldChangeHandler}
-                            required
+                            className="btn btn-primary"
+                            type="submit" value="Create"
+                            disabled={this.props.isDisabled}
                         />
                     </div>
-                    <input
-                        className="btn btn-default"
-                        type="submit" value="Create"
-                        disabled={this.props.isDisabled}
-                    />
+                    </div>
                 </form>
             </div>
         );

@@ -35,18 +35,22 @@ export default class Seed extends Component {
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.discount}%</td>
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.producer}</td>
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.model}</td>
-                <td>
-                    <input
-                        className="btn btn-primary"
-                        type="button"
-                        name="addToChart"
-                        value="Add to cart"
-                        data-seed-name={this.props.name}
-                        data-seed-price={this.props.price}
-                        data-seed-discount={this.props.discount}
-                        onClick={this.props.addToCart}
-                    />
-                </td>
+                {
+                    sessionStorage.getItem('username') !== null 
+                    ?<td>
+                        <input
+                            className="btn btn-primary"
+                            type="button"
+                            name="addToChart"
+                            value="Add to cart"
+                            data-seed-name={this.props.name}
+                            data-seed-price={this.props.price}
+                            data-seed-discount={this.props.discount}
+                            onClick={this.props.addToCart}
+                        />
+                    </td>
+                    :<td>Login for more actions</td>}
+
             </tr>
         );
     }

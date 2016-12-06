@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DetailsPage from './DetailsPage';
 import CommentModel from '../../../Models/CommentModel.js';
-
+import './DetailsPage.css';
 export default class CommentView extends Component {
     constructor(props) {
         super(props);
@@ -45,11 +45,9 @@ export default class CommentView extends Component {
         }
 
         return (
-            <div>
-                <span>Author: {this.props.authorName}</span>
-                <br />
-                <textarea disabled="true" value={this.props.content}></textarea>
-                <br/>
+            <div id="comment">
+                <span>{this.props.authorName}: </span>
+                <div>{this.props.content}</div>
                 <span>Date: {this.props.date}</span>
                 <br/>
                 <br />
@@ -63,17 +61,17 @@ export default class CommentView extends Component {
                             data-comment-id={this.props.commentId}
                         />
                         : undefined
-                 }
-                 {
-                     sessionStorage.getItem('username') === 'admin' || sessionStorage.getItem('username') === this.props.authorName ?
-                         <input
-                             type="button"
-                             value="Delete"
-                             className="btn btn-danger"
-                             data-comment-id={this.props.commentId}
-                             onClick={this.showConfirmDelete}
-                         />
-                         : undefined
+                }
+                {
+                    sessionStorage.getItem('username') === 'admin' || sessionStorage.getItem('username') === this.props.authorName ?
+                        <input
+                            type="button"
+                            value="Delete"
+                            className="btn btn-danger"
+                            data-comment-id={this.props.commentId}
+                            onClick={this.showConfirmDelete}
+                        />
+                        : undefined
                 }
             </div>
         );
@@ -93,7 +91,7 @@ export default class CommentView extends Component {
 
     cancelDelete (event) {
         this.setState({
-           showConfirmDelete: false
+            showConfirmDelete: false
         });
         this.props.refreshComments();
     }
@@ -131,6 +129,5 @@ export default class CommentView extends Component {
         });
     }
 
-    // sega shte ti pokaja kakvo moje da se napravi
-
 }
+

@@ -8,12 +8,10 @@ export default class HomePage extends Component {
 
         this.state = {
             latestSeeds: [],
-            mostLiked:[],
             promos: []
         };
 
         this.onLoadLatestSuccess = this.onLoadLatestSuccess.bind(this);
-        this.onLoadLikedSuccess = this.onLoadLikedSuccess.bind(this);
         this.onLoadPromotionsSuccess = this.onLoadPromotionsSuccess.bind(this);
         this.handleOnClickEvent = this.handleOnClickEvent.bind(this);
     }
@@ -22,9 +20,6 @@ export default class HomePage extends Component {
         let lastestSeeds = this.state.latestSeeds.map(function (seed, index) {
              return  _self.takeSeed(seed,index)
         });
-        let liked = this.state.mostLiked.map(function (seed, index) {
-            return  _self.takeSeed(seed,index)
-        });
         let proms = this.state.promos.map(function (seed, index) {
             return  _self.takeSeed(seed,index)
         });
@@ -32,15 +27,11 @@ export default class HomePage extends Component {
             <div className="row">
                 <h1>Home Page</h1>
                     <div>
-                    <h1>3 newest</h1>
+                    <h1>Just added</h1>
                     {lastestSeeds}
                 </div>
                 <div>
-                    <h1>3 most rated</h1>
-                    {liked}
-                </div>
-                <div>
-                    <h1>3 promotional</h1>
+                    <h1>Latest promotions</h1>
                     {proms}
                 </div>
             </div>
@@ -62,21 +53,6 @@ export default class HomePage extends Component {
         });
     }
 
-    onLoadLikedSuccess(response) {
-        let sorted = response.sort(function (a,b) {
-            return a.likes - b.likes;
-        });
-
-        let count = validateCount(sorted);
-        let curr = [];
-        for (let i = 0; i < count; i++) {
-            curr.push(sorted[i]);
-        }
-        this.setState({
-            mostLiked: curr
-        });
-    }
-
     onLoadPromotionsSuccess(response) {
         let sorted = response.filter(x => x.discount > 0).sort(function (a,b) {
             return new Date(b.dateCreated) - new Date(a.dateCreated);
@@ -95,7 +71,6 @@ export default class HomePage extends Component {
     componentWillMount() {
         SeedModel.loadPromoSeeds(this.onLoadPromotionsSuccess);
         SeedModel.loadNewestSeeds(this.onLoadLatestSuccess);
-        SeedModel.loadMostLikedSeeds(this.onLoadLikedSuccess);
     }
 
     handleOnClickEvent (event) {

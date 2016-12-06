@@ -26,11 +26,6 @@ export default class SeedModel {
         Requester.get('appdata', 'seeds', 'guest')
             .then(callback);
     }
-
-    static loadMostLikedSeeds (callback) {
-        Requester.get('appdata', 'seeds', 'guest')
-            .then(callback);
-    }
     
     static loadNewestSeeds (callback) {
         Requester.get('appdata', 'seeds', 'guest')
