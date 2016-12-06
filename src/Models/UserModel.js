@@ -19,7 +19,7 @@ export default class User {
                 saveSession(responseData);
                 callback(true);
             })
-            .catch((error) => {
+            .catch(() => {
                 callback(false)
             });
     }
@@ -36,7 +36,7 @@ export default class User {
                 saveSession(responseData);
                 callback(true);
             })
-            .catch((error) => {
+            .catch(() => {
                 callback(false)
             });
     }
@@ -44,11 +44,11 @@ export default class User {
     static logout (callback) {
         Requester
             .post('user', '_logout', 'kinvey', null)
-            .then((responseData) => {
+            .then(() => {
                 sessionStorage.clear();
                 callback(true);
             })
-            .catch((error) => {
+            .catch(() => {
                 callback(false)
             });
     }

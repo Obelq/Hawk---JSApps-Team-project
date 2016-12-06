@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DetailsPage from './DetailsPage';
 import CommentModel from '../../../Models/CommentModel.js';
 import './DetailsPage.css';
 export default class CommentView extends Component {
@@ -22,63 +21,104 @@ export default class CommentView extends Component {
     }
 
     render () {
-        let _self = this;
         if (this.state.showConfirmDelete) {
-            return <div> <h2>Confirm delete</h2>
-                <span>Author: {this.props.authorName}</span>
-                <br />
-                <span>Description: {this.props.content || "No description"}</span>
-                <br/>
-                <span>Date: {this.props.date}</span>
-                <button onClick={this.deleteComment} data-comment-id={this.props.commentId} className="btn btn-danger">Delete</button>
-                <button onClick={this.cancelDelete} className="btn btn-default">Cancel</button>
-            </div>
+            return this.renderConfirmDelete();
         } else if (this.state.showEditForm) {
-            return <div> <h2>Edit</h2>
-                <form >
-                    <textarea onChange={this.handleOnChangeEvent} value={this.state.newCommentContent}></textarea>
-                    <button onClick={this.editComment} data-comment-id={this.props.commentId} className="btn btn-primary">Edit</button>
-                    <button onClick={this.cancelEdit} className="btn btn-default">Cancel</button>
-                </form>
-
-            </div>
+            return this.renderEditCommentForm();
+        } else {
+            return this.renderComment();
         }
+    }
 
+    renderEditCommentForm () {
         return (
-            <div id="comment">
-                <span>{this.props.authorName}: </span>
-                <div>{this.props.content}</div>
-                <span>Date: {this.props.date}</span>
-                <br/>
-                <br />
-                {
-                    sessionStorage.getItem('username') === 'admin' || sessionStorage.getItem('username') === this.props.authorName ?
-                        <input
-                            type="button"
-                            value="Edit"
-                            className="btn btn-primary"
-                            onClick={this.showEditForm}
-                            data-comment-id={this.props.commentId}
-                        />
-                        : undefined
-                }
-                {
-                    sessionStorage.getItem('username') === 'admin' || sessionStorage.getItem('username') === this.props.authorName ?
-                        <input
-                            type="button"
-                            value="Delete"
-                            className="btn btn-danger"
-                            data-comment-id={this.props.commentId}
-                            onClick={this.showConfirmDelete}
-                        />
-                        : undefined
-                }
+            <div className="media comment-container">
+                <a className="pull-left" href="#">
+                    <img className="media-object" src="http://placehold.it/64x64" alt=""/>
+                </a>
+                <div className="media-body">
+                    <h4 className="media-heading">{this.props.authorName}
+                        <small>{this.props.date}</small>
+                    </h4>
+                    <textarea
+                        className="edit-comment-input-filed"
+                        onChange={this.handleOnChangeEvent}
+                        value={this.state.newCommentContent}
+                        cols="60"
+                        >
+                    </textarea>
+                    <div className="comment-actions">
+                        <button onClick={this.editComment} data-comment-id={this.props.commentId} className="btn btn-primary">
+                            Edit
+                        </button>
+                        <button onClick={this.cancelEdit} className="btn btn-default">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
 
+    renderConfirmDelete () {
+        return (
+            <div className="media comment-container">
+                <a className="pull-left" href="#">
+                    <img className="media-object" src="http://placehold.it/64x64" alt=""/>
+                </a>
+                <div className="media-body">
+                    <h4 className="media-heading">{this.props.authorName}
+                        <small>{this.props.date}</small>
+                    </h4>
+                    <span className="confirm-delete-text">Confirm delete</span>
+                    <div className="comment-actions">
+                        <button onClick={this.deleteComment}
+                               data-comment-id={this.props.commentId}
+                               className="btn btn-danger"
+                        >Delete</button>
+                        <button onClick={this.cancelDelete} className="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
-    showConfirmDelete(event){
+    renderComment () {
+        let adminActions;
+        if (sessionStorage.getItem('username') === 'admin') {
+            adminActions = (
+                <div className="comment-admin-actions">
+                    <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={this.showEditForm}
+                    >Edit</button>
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={this.showConfirmDelete}
+                    >Delete</button>
+                </div>
+            );
+        }
+
+        return (
+            <div className="media">
+                <a className="pull-left" href="#">
+                    <img className="media-object" src="http://placehold.it/64x64" alt=""/>
+                </a>
+                <div className="media-body">
+                    <h4 className="media-heading">{this.props.authorName}
+                        <small>{this.props.date}</small>
+                    </h4>
+                    {this.props.content}
+                    {adminActions}
+                </div>
+            </div>
+        );
+    }
+
+    showConfirmDelete(){
         this.state.showConfirmDelete = true;
         this.props.refreshComments();
     }
@@ -89,14 +129,14 @@ export default class CommentView extends Component {
         CommentModel.delete(commentId, this.props.refreshComments);
     }
 
-    cancelDelete (event) {
+    cancelDelete () {
         this.setState({
             showConfirmDelete: false
         });
         this.props.refreshComments();
     }
 
-    showEditForm(event){
+    showEditForm(){
         this.state.showEditForm = true;
         this.props.refreshComments();
     }
