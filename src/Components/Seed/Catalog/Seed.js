@@ -43,6 +43,7 @@ export default class Seed extends Component {
                         value="Add to cart"
                         data-seed-name={this.props.name}
                         data-seed-price={this.props.price}
+                        data-seed-discount={this.props.discount}
                         onClick={this.props.addToCart}
                     />
                 </td>

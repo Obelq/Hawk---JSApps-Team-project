@@ -124,7 +124,8 @@ export default class CatalogPage extends Component {
     handleAddToCartEvent (event) {
         let newItem = {
             name: event.currentTarget.getAttribute('data-seed-name'),
-            price: event.currentTarget.getAttribute('data-seed-price')
+            price: event.currentTarget.getAttribute('data-seed-price'),
+            discount: event.currentTarget.getAttribute('data-seed-discount')
         };
 
         
