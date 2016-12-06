@@ -11,7 +11,7 @@ export default class DetailsPage extends Component {
             name: '',
             description: '',
             location: '',
-            price: '',
+            price: 0,
             imageUrl: '',
             dateCreated: '',
             comments: [],
@@ -47,7 +47,7 @@ export default class DetailsPage extends Component {
             <div className="col-lg-8">
                 <h1>{this.state.name}</h1>
                 <p className="lead">
-                    Price: <a href="#">{this.state.price} лв.</a>
+                    Price: <a href="#">{this.state.price.toFixed(2)} лв.</a>
                 </p>
                 <hr/>
                     <p><span className="glyphicon glyphicon-time"></span> {this.state.dateCreated}</p>
