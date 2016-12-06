@@ -5,20 +5,50 @@ import CommentModel from '../../../Models/CommentModel.js';
 export default class CommentView extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     commentId: ''
-        // };
+        this.state = {
+            showConfirmDelete: false,
+            showEditForm: false,
+            newCommentContent: this.props.content
+        };
 
         this.deleteComment = this.deleteComment.bind(this);
+        this.showConfirmDelete = this.showConfirmDelete.bind(this);
+        this.cancelDelete = this.cancelDelete.bind(this);
+        this.editComment = this.editComment.bind(this);
+        this.showEditForm = this.showEditForm.bind(this);
+        this.cancelEdit = this.cancelEdit.bind(this);
+        this.handleOnChangeEvent = this.handleOnChangeEvent.bind(this);
+
     }
 
     render () {
         let _self = this;
+        if (this.state.showConfirmDelete) {
+            return <div> <h2>Confirm delete</h2>
+                <span>Author: {this.props.authorName}</span>
+                <br />
+                <span>Description: {this.props.content || "No description"}</span>
+                <br/>
+                <span>Date: {this.props.date}</span>
+                <button onClick={this.deleteComment} data-comment-id={this.props.commentId} className="btn btn-danger">Delete</button>
+                <button onClick={this.cancelDelete} className="btn btn-default">Cancel</button>
+            </div>
+        } else if (this.state.showEditForm) {
+            return <div> <h2>Edit</h2>
+                <form >
+                    <textarea onChange={this.handleOnChangeEvent} value={this.state.newCommentContent}></textarea>
+                    <button onClick={this.editComment} data-comment-id={this.props.commentId} className="btn btn-primary">Edit</button>
+                    <button onClick={this.cancelEdit} className="btn btn-default">Cancel</button>
+                </form>
+
+            </div>
+        }
+
         return (
             <div>
                 <span>Author: {this.props.authorName}</span>
                 <br />
-                <span>Description: {this.props.content || "No description"}</span>
+                <textarea disabled="true" value={this.props.content}></textarea>
                 <br/>
                 <span>Date: {this.props.date}</span>
                 <br/>
@@ -29,7 +59,7 @@ export default class CommentView extends Component {
                             type="button"
                             value="Edit"
                             className="btn btn-primary"
-                            onClick={this.editComment}
+                            onClick={this.showEditForm}
                             data-comment-id={this.props.commentId}
                         />
                         : undefined
@@ -41,7 +71,7 @@ export default class CommentView extends Component {
                              value="Delete"
                              className="btn btn-danger"
                              data-comment-id={this.props.commentId}
-                             onClick={this.deleteComment}
+                             onClick={this.showConfirmDelete}
                          />
                          : undefined
                 }
@@ -49,12 +79,58 @@ export default class CommentView extends Component {
         );
     }
 
-    deleteComment(event){
-        console.log(event.target.getAttribute('data-comment-id'));
+
+    showConfirmDelete(event){
+        this.state.showConfirmDelete = true;
+        this.props.refreshComments();
+    }
+
+    deleteComment (event) {
+        let commentId = event.target.getAttribute('data-comment-id');
+        this.state.showConfirmDelete = false;
+        CommentModel.delete(commentId, this.props.refreshComments);
+    }
+
+    cancelDelete (event) {
+        this.setState({
+           showConfirmDelete: false
+        });
+        this.props.refreshComments();
+    }
+
+    showEditForm(event){
+        this.state.showEditForm = true;
+        this.props.refreshComments();
     }
 
     editComment (event) {
-        //event.target.getAttribute('data-comment-id');
+        event.preventDefault();
+        let commentId = event.target.getAttribute('data-comment-id');
+        this.state.showConfirmDelete = false;
+        let content = this.state.newCommentContent;
+        let author = sessionStorage.getItem('username');
+
+        CommentModel.edit(commentId, content, author, this.props.seedId, this.props.refreshComments);
+
+        this.setState({
+            showEditForm: false
+        });
     }
+
+    cancelEdit (event) {
+        event.preventDefault();
+        this.setState({
+            showEditForm: false
+        });
+        this.props.refreshComments();
+    }
+
+    handleOnChangeEvent (event) {
+        this.setState({
+            newCommentContent: event.target.value
+        });
+    }
+
+    // sega shte ti pokaja kakvo moje da se napravi
 
 }

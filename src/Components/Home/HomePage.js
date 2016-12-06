@@ -29,7 +29,7 @@ export default class HomePage extends Component {
             return  _self.takeSeed(seed,index)
         });
         return (
-            <div>
+            <div className="row">
                 <h1>Home Page</h1>
                     <div>
                     <h1>3 newest</h1>

@@ -25,17 +25,20 @@ export default class DetailsPage extends Component {
     }
 
     render() {
+        let _self = this;
         let comments = this.state.comments.map(function (comment, index) {
             return <CommentView key={index}
                                 commentId={comment._id}
                                 authorName={comment.authorName}
                                 content={comment.content}
                                 date={comment.date}
+                                seedId={_self.props.params.seedId}
+                                refreshComments={_self.onCreateCommentSuccess}
             />
         });
 
         return (
-            <div className="col-md-9">
+            <div className="row">
                 <div className="thumbnail">
                     <img className="img-responsive" src={this.state.imageUrl} alt="Seed" />
                     <div className="caption-full">

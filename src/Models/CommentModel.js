@@ -19,16 +19,16 @@ export default class CommentModel {
             .then((response) => callback(response));
     }
 
-    static edit (content, authorName, seedId, callback) {
+    static edit (commentId, content, authorName, seedId, callback) {
         let seedData = {
             content: content,
             authorName: authorName,
-            seedId: seedId,
-            date: new Date()
+            date: new Date(),
+            seedId: seedId
         };
 
         Requester
-            .update('appdata', `comments/${seedId}`, 'kinvey', seedData)
+            .update('appdata', `comments/${commentId}`, 'kinvey', seedData)
             .then(() => callback(true))
             .catch(() => callback(false));
     }
