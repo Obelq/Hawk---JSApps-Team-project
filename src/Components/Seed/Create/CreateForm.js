@@ -78,7 +78,7 @@ export default class CreateForm extends Component {
                 </div>
 
                 <div className="form-group">
-                    <label>Discount</label>
+                    <label>Discount (%)</label>
                     <input
                         className="form-control"
                         type="number"

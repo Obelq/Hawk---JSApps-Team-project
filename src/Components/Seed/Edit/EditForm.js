@@ -72,7 +72,7 @@ export default class EditForm extends Component {
                 </div>
 
                 <div className="form-group">
-                    <label>Discount</label>
+                    <label>Discount (%)</label>
                     <input
                         className="form-control"
                         type="number"
