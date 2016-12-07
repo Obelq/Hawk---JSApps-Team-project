@@ -26,13 +26,19 @@ export default class ShoppingCart extends Component {
             })
                 .filter(x => x);
             return (
-                <div className="shopping-cart-container">
-                    <h3>Shopping cart</h3>
-                    {shopingCartItems}
-                    <div className="totalPrice">
-                        Total cost: {totalPrice.toFixed(2)}$
+                    <div className="pull-right">
+
+                            <h3>
+                                <span className="glyphicon glyphicon-shopping-cart"></span>
+                                Shopping cart
+                            </h3>
+                            {shopingCartItems}
+                            <div className="totalPrice">
+                                Total cost: {totalPrice.toFixed(2)}$
+                            </div>
+
                     </div>
-                </div>
+
             );
         }
         return null;
