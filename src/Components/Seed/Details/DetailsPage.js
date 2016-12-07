@@ -58,7 +58,19 @@ export default class DetailsPage extends Component {
                         Description: <br />
                         {this.state.description}
                     </p>
+                        <input type="button"
+                               value="Edit"
+                               className="btn btn-primary"
+                               onClick={() => this.context.router.push('/edit/' + this.state.seedId)}
+                        />
+                        <input
+                            type="button"
+                            value="Delete"
+                            className="btn btn-danger"
+                            onClick={() => this.context.router.push('/delete/' + this.state.seedId)}
+                        />
                     <hr/>
+
 
                     <div className="well">
                         <h4>Leave a Comment:</h4>
