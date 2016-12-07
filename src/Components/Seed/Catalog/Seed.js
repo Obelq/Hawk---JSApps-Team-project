@@ -29,7 +29,7 @@ export default class Seed extends Component {
         return (
             <tr className="seed-row" >
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.name}</td>
-                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img alt="seed" width="150" height="150" src={this.props.imageUrl} alt="Seed"/></td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img alt="seed" width="150" height="150" src={this.props.imageUrl} /></td>
                 {priceTd}
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.location}</td>
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.discount}%</td>
@@ -39,7 +39,7 @@ export default class Seed extends Component {
                     sessionStorage.getItem('username') !== null 
                     ?<td>
                         <input
-                            className="btn btn-primary"
+                            className="btnSeeds btn btn-primary"
                             type="button"
                             name="addToChart"
                             value="Add to cart"
