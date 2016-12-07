@@ -121,3 +121,10 @@ h1 span {
 .row{
     padding-bottom: 20px;
 }
+.old-price{
+    color: red;
+}
+.amount-span{
+    text-align: center;
+    color: blue;
+}

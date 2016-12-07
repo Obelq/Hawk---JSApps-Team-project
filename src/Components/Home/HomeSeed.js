@@ -22,13 +22,16 @@ export default class HomeSeed extends Component {
         if (this.props.discount > 0) {
             priceLi =
                 <li className="list-group-item">
-                    <strike>{this.props.price}$  </strike>
-                    <span className="amount-span">{discountedPrice}$  Amount: 1kg</span>
+                    <div>Amount: 1kg</div>
+                    <strike>Old Price: {this.props.price}$</strike>
+                    <strong><div>New Price: {discountedPrice}$</div></strong>
                 </li>
+
         } else {
             priceLi =
                 <li className="list-group-item">
-                    <span className="amount-span">{discountedPrice}$  Amount: 1kg</span>
+                    <div>Amount: 1kg</div>
+                    <div>{discountedPrice}$</div>
                 </li>
         }
 
