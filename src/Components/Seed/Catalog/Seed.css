@@ -167,3 +167,29 @@ h1 span {
     float: right;
 }
 
+
+.seed-row img {
+    width: 75px;
+    height: 75px;
+}
+
+.col-lg-8 {
+    margin-right: 50px;
+}
+
+.shopping-cart {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    min-width: 150px;
+}
+
+.shopping-cart > * {
+    margin: 5px;
+    padding: 5px;
+}
+
+input {
+    margin: 5px;
+    padding: 5px;
+}

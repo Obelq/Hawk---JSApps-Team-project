@@ -26,11 +26,10 @@ export default class Seed extends Component {
                 </td>
         }
 
-
         return (
             <tr className="seed-row" >
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.name}</td>
-                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img src={this.props.imageUrl} alt="Snimka"/></td>
+                <td data-seed-id={this.props.seedId} onClick={this.props.onClick}><img alt="seed" width="150" height="150" src={this.props.imageUrl} alt="Seed"/></td>
                 {priceTd}
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.location}</td>
                 <td data-seed-id={this.props.seedId} onClick={this.props.onClick}>{this.props.discount}%</td>

@@ -41,7 +41,7 @@ export default class CommentView extends Component {
                         <small>{this.props.date}</small>
                     </h4>
                     <textarea
-                        className="edit-comment-input-filed"
+                        className="edit-comment-input-field"
                         onChange={this.handleOnChangeEvent}
                         value={this.state.newCommentContent}
                         cols="60"
@@ -137,7 +137,10 @@ export default class CommentView extends Component {
     }
 
     showEditForm(){
-        this.state.showEditForm = true;
+        this.setState({
+            showEditForm: true
+        });
+
         this.props.refreshComments();
     }
 
@@ -158,8 +161,10 @@ export default class CommentView extends Component {
     cancelEdit (event) {
         event.preventDefault();
         this.setState({
-            showEditForm: false
+            showEditForm: false,
+            newCommentContent: this.props.content
         });
+
         this.props.refreshComments();
     }
 

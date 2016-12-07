@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SeedModel from '../../../Models/SeedModel';
-import HomeSeed from '../../Home/HomeSeed';
+import Seed from './Seed';
 import ShoppingCart from './ShoppingCart';
 let Form = React.createClass({
     render: function () {
@@ -47,6 +47,7 @@ export default class CatalogPage extends Component {
             searchBy: searchBy
         });
     }
+
     searchParams (criteria, self, seed) {
          if (criteria === "location") {
             return (seed.location.indexOf(self.state.searchText) !== -1);
@@ -63,7 +64,7 @@ export default class CatalogPage extends Component {
         let _self = this;
         let newestSeeds = this.state.seeds.map(function (seed, index) {
             if (_self.searchParams(_self.state.searchBy, _self, seed)) {
-                return <HomeSeed key={index}
+                return <Seed key={index}
                              name={seed.name}
                              price={seed.price}
                              location={seed.location}
@@ -80,22 +81,36 @@ export default class CatalogPage extends Component {
             }
         });
 
-        return (
-
-
-            <div className="yani-row">
-                <ShoppingCart
-                    items={this.state.shoppingCartItems}
-                    removeItem={_self.removeCartItem}
-                />
-                <Form onsubmit={this.onSubmitHandler.bind(this)}/>
-
-                <div className="catalog-items-container">
-                    {newestSeeds}
+         return (
+             <div className="catalog-page-content">
+                <div className="row">
+                    <ShoppingCart 
+                        items={this.state.shoppingCartItems}
+                        removeItem={_self.removeCartItem}
+                    />
+                    <div className="col-lg-9">
+                        <Form onsubmit={this.onSubmitHandler}/>
+                            <table className="table-condensed">
+                                <thead>
+                                <tr>                           
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+                                    <th>Location</th>
+                                    <th>Discount</th>
+                                    <th>Producer</th>
+                                    <th>Model</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {newestSeeds}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-            </div>
-        );
+             </div>
+          );
     }
 
     onLoadSuccess (response) {

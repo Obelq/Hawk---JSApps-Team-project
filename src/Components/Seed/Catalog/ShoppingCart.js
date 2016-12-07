@@ -5,7 +5,6 @@ export default class ShoppingCart extends Component {
         if (sessionStorage.getItem('username') !== null) {
             let totalPrice = 0;
             let shopingCartItems = this.props.items.map((item, index) => {
-                console.log(item);
                 let discountPercents;
                 if (item.discount < 10) {
                     discountPercents = Number(`0.0${item.discount}`);
@@ -24,23 +23,22 @@ export default class ShoppingCart extends Component {
                         </span>
                 </div>
             })
-                .filter(x => x);
+            .filter(x => x);
+
             return (
-                    <div className="pull-right">
-
-                            <h3>
-                                <span className="glyphicon glyphicon-shopping-cart"></span>
-                                Shopping cart
-                            </h3>
-                            {shopingCartItems}
-                            <div className="totalPrice">
-                                Total cost: {totalPrice.toFixed(2)}$
-                            </div>
-
+                <div className="shopping-cart col-lg-3 pull-right">
+                    <h3>
+                        <span className="glyphicon glyphicon-shopping-cart"></span>
+                        Shopping cart
+                    </h3>
+                    {shopingCartItems}
+                    <div className="totalPrice">
+                        Total cost: {totalPrice.toFixed(2)}$
                     </div>
-
+                </div>
             );
         }
+
         return null;
     }
 }
