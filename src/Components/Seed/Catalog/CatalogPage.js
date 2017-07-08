@@ -45,15 +45,14 @@ export default class CatalogPage extends Component {
         this.setState({
             searchText: searchText,
             searchBy: searchBy
-        });
+        })
     }
-
     searchParams (criteria, self, seed) {
-         if (criteria === "location") {
+        if (criteria == "location") {
             return (seed.location.indexOf(self.state.searchText) !== -1);
-        } else if (criteria === "producer") {
+        } else if (criteria == "producer") {
             return (seed.producer.indexOf(self.state.searchText) !== -1);
-        } else if (criteria === "model") {
+        } else if (criteria == "model") {
             return (seed.model.indexOf(self.state.searchText) !== -1);
         } else {
             return (seed.name.indexOf(self.state.searchText) !== -1 || seed.description.indexOf(self.state.searchText) !== -1);
@@ -79,38 +78,39 @@ export default class CatalogPage extends Component {
 
                 />
             }
-        });
 
-         return (
-             <div className="catalog-page-content">
-                <div className="row">
-                    <ShoppingCart 
+            return undefined;
+        });
+        return (
+
+            <div className="row">
+                <div className="catalog-container col-sm-8">
+                    <Form onsubmit={this.onSubmitHandler.bind(this)}/>
+                    <table className="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Location</th>
+                            <th>Discount</th>
+                            <th>Producer</th>
+                            <th>Model</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {newestSeeds}
+                        </tbody>
+                    </table>
+
+                    <ShoppingCart
                         items={this.state.shoppingCartItems}
                         removeItem={_self.removeCartItem}
                     />
-                    <div className="col-lg-9">
-                        <Form onsubmit={this.onSubmitHandler}/>
-                            <table className="table-condensed">
-                                <thead>
-                                <tr>                           
-                                    <th>Name</th>
-                                    <th>Image</th>
-                                    <th>Price</th>
-                                    <th>Location</th>
-                                    <th>Discount</th>
-                                    <th>Producer</th>
-                                    <th>Model</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    {newestSeeds}
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-             </div>
-          );
+            </div>
+        );
     }
 
     onLoadSuccess (response) {
